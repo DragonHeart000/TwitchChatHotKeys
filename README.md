@@ -50,7 +50,7 @@ Skinning is not yet supported, however, the current plan is to let users use any
 ## Built With
 
 * [PircBotX](https://github.com/TheLQ/pircbotx) - IRC Library
-* [jnativehook](https://github.com/kwhat/jnativehook)
+* [jnativehook](https://github.com/kwhat/jnativehook) - Key Board Listener
 * [Maven](https://maven.apache.org/) - Dependency Management
 
 ## Contributing
