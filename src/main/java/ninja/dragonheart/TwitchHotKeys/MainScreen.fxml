@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ninja.dragonheart.TwitchHotKeys.BindScreenController">
+  <children>
+    <MenuBar layoutX="0.0" layoutY="0.0" prefWidth="820.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#newFromMenu" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#loadSavedAfterStart" text="Load Saved Config" />
+            <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#aboutLink" text="About" />
+            <MenuItem mnemonicParsing="false" onAction="#gitHubLink" text="GitHub" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <TextField fx:id="newBindOutPut" layoutX="260.0" layoutY="100.0" prefHeight="63.0" prefWidth="451.0" promptText="Example: /Commercial" />
+    <Text layoutX="260.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OutPut" />
+    <Button layoutX="722.0" layoutY="121.0" mnemonicParsing="false" onMouseReleased="#saveNewBind" text="Save" />
+    <Text layoutX="133.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="InPut" />
+    <Text layoutX="34.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Bind">
+      <font>
+        <Font size="20.0" fx:id="x1" />
+      </font>
+    </Text>
+    <Line endX="700.0" layoutX="101.0" layoutY="199.0" startX="-100.0" />
+    <Button layoutX="14.0" layoutY="122.0" mnemonicParsing="false" onMouseReleased="#makeNewBind" text="Click to set bind" />
+    <Text fx:id="newBindInPut" layoutX="133.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLANK">
+      <fill>
+        <Color blue="1.000" green="0.200" red="0.648" fx:id="x3" />
+      </fill>
+      <font>
+        <Font size="30.0" fx:id="x2" />
+      </font>
+    </Text>
+    <TextField fx:id="checkBindOutPut" layoutX="260.0" layoutY="278.0" prefHeight="63.0" prefWidth="451.0" />
+    <Text layoutX="260.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OutPut of bind" />
+    <Text layoutX="133.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input to check" />
+    <Text font="$x1" layoutX="34.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check Bind" />
+    <Line endX="700.0" layoutX="101.0" layoutY="377.0" startX="-100.0" />
+    <Button layoutX="14.0" layoutY="300.0" mnemonicParsing="false" onMouseReleased="#checkNewBind" text="Click to set bind" />
+    <Text fx:id="checkBindInPut" fill="$x3" font="$x2" layoutX="133.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLANK" />
+    <TextField fx:id="deleteBindOutPut" layoutX="260.0" layoutY="460.0" prefHeight="63.0" prefWidth="451.0" />
+    <Text layoutX="260.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OutPut of bind being deleted" />
+    <Button layoutX="722.0" layoutY="480.0" mnemonicParsing="false" onMouseReleased="#deleteBind" text="Confirm" />
+    <Text layoutX="133.0" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input to delete" />
+    <Text font="$x1" layoutX="34.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Bind" />
+    <Button layoutX="14.0" layoutY="481.0" mnemonicParsing="false" onMouseReleased="#deleteNewBind" text="Click to set bind" />
+    <Text fx:id="deleteBindInPut" fill="$x3" font="$x2" layoutX="133.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLANK" />
+    <Button layoutX="759.0" layoutY="31.0" mnemonicParsing="false" onMouseReleased="#bindHelp" text="?" />
+  </children>
+</AnchorPane>
