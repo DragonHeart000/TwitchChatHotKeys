@@ -49,8 +49,7 @@ public class Main extends Application{
 		scene.getStylesheets().add("default.css"); //Set this dynamically based on user preference
 		scene.getStylesheets().add(getClass().getResource("dark.css").toExternalForm());
 		//stage.getIcons().add(new Image(getClass().getResourceAsStream("tempiconwhilstmakingit.png")));
-		
-		 //TODO add close
+
 		 stage.setOnHidden(event -> {
 			try {
 				//TODO Ensure that everything closes properly

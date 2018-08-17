@@ -160,10 +160,11 @@ public class BindScreenController {
 	}
 	
 	public void bindHelp(){
-		//TODO
+		//TODO Add more explanation for what you can do and how to do it.
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("This is an Alpha, don't expect every button to work");
-		alert.setHeaderText(null);
+		alert.setTitle("Help");
+		alert.setHeaderText("Help");
+		alert.setContentText("To refference the last user type $$USER or @$$USER to @ them!");
 		alert.showAndWait();
 	}
 	

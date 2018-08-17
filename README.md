@@ -13,7 +13,7 @@ Java 9 or later is required to run Twitch Chat Hot Keys due to the JavaFX librar
 
 Given that you have Java 9 or newer installed you are able to just run the jar file to execute TwitchChatHotKeys and start.
 
-If you downloaded the source you are able to compile the project into a jar file using your prefered compiler. Be sure to have Maven for the dependencies.
+If you downloaded the source you are able to compile the project into a jar file using your preferred compiler. Be sure to have Maven for the dependencies.
 
 All saves are currently saved in C://TwitchChatHotKeys/ However, this may be changed in the future and likely will be at least for certain Operating Systems.
 
@@ -21,7 +21,7 @@ All saves are currently saved in C://TwitchChatHotKeys/ However, this may be cha
 
 The first time you launch TwitchChatHotKeys you will be greeted with a welcome screen, this has a future plan of telling users when there are updates but currently is just to welcome first time users.
 
-After continueing from there from then on you will go straight to the login screen:
+After continuing from there from then on you will go straight to the login screen:
 
 ![Login screenshot](/Screenshots/sctl.JPG?raw=true)
 
@@ -29,15 +29,15 @@ Provide your twitch.tv username and oauth or if you saved it last time go to fil
 
 ![Main screenshot](/Screenshots/sctm.JPG?raw=true)
 
-The UI is temparary and will be replaced with a better one in the future. Here you can do three new things
+The UI is temporary and will be replaced with a better one in the future. Here you can do three new things
 
 ### Add new binds
 
-You add a new bind by hitting the "Click to set bind" button, hitting a key that you want the bind to be set to, typeing in the output of the bind, and then hitting save.
+You add a new bind by hitting the "Click to set bind" button, hitting a key that you want the bind to be set to, typing in the output of the bind, and then hitting save.
 
 ### Check binds
 
-To check a bind you can hit the "Click to set bind" button, hitting a key, and then the output of the bind will be show in the OutPut of bind box.
+To check a bind you can hit the "Click to set bind" button, hitting a key, and then the output of the bind will be shown in the OutPut of bind box.
 
 ### Delete bind
 
@@ -45,7 +45,7 @@ To delete a bind you can hit the "Click to set bind" button, hit a key, confirm 
 
 ### Skinning
 
-Skinning is not yet supported, however, the current plan is to let users use any CSS file to skin TwitchChatHotKeys but there will be multiple offical skins packaged with it and more to download on my website.
+Skinning is not yet supported, however, the current plan is to let users use any CSS file to skin TwitchChatHotKeys but there will be multiple official skins packaged with it and more to download on my website.
 
 ## Built With
 

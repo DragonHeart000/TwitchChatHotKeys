@@ -7,16 +7,15 @@ import org.pircbotx.hooks.types.GenericMessageEvent;
 public class Listener extends ListenerAdapter{
 	
 
-	String lastUser;
-	String lastUserMessage;
+	public static String lastUser;
+	public static String lastUserMessage;
 	final UserSettings LOADEDSETTINGS=Main.getSettings();
 
 	
 	@Override
     public void onGenericMessage(GenericMessageEvent event) {
-		System.out.println(event.getMessage().toString());
-		//TODO save user info
 		lastUser=event.getUser().getNick();
+		System.out.println(lastUser);
 		lastUserMessage=event.getMessage();
 	}
 	
@@ -27,12 +26,12 @@ public class Listener extends ListenerAdapter{
 	
 	//Get IRC info
 	
-	public String getLastUser(){
+	public static String getLastUser(){
 		//Useful for banning or timing out users with a macro. This will return the most recent person to talk in chat
 		return lastUser;
 	}
 	
-	public String getLastUserMessage(){
+	public static String getLastUserMessage(){
 		//Useful for giving a reason for a ban
 		return lastUserMessage;
 	}
