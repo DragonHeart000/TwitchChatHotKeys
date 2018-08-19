@@ -15,7 +15,7 @@ public class ErrorHandling {
 	public static void error(Exception e, String context){
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Exception Dialog");
-		alert.setHeaderText("Twitch Chat Hot Keys has crashed!");
+		alert.setHeaderText("Twitch Chat Hot Keys has encountered an issue!");
 		alert.setContentText(context);
 
 		// Create expandable Exception.
@@ -49,7 +49,7 @@ public class ErrorHandling {
 	public static void error(Exception e){
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Exception Dialog");
-		alert.setHeaderText("Twitch Chat Hot Keys has crashed!");
+		alert.setHeaderText("Twitch Chat Hot Keys has encountered an issue!");
 		alert.setContentText("If this continues please report it on the GitHub page!");
 
 		// Create expandable Exception.
