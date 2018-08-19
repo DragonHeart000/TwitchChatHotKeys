@@ -56,7 +56,7 @@ Skinning is not yet supported, however, the current plan is to let users use any
 
 ## Contributing
 
-Please read [CONTRIBUTING.md]() for details on the process for submitting pull requests to me.
+Please read [CONTRIBUTING.md](https://github.com/DragonHeart000/TwitchChatHotKeys/blob/master/CONTRIBUTING.md) for details on the process for helping with Twitch Chat Hot Keys.
 
 ## Versioning
 
