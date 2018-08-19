@@ -208,4 +208,14 @@ public class StartupController {
 		} 
 	}
 	
+	public void changeStyle(){
+		try {
+			setupPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("Styling/styler.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from start()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from start()");
+			e.printStackTrace();
+		}
+	}
+	
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="stylerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ninja.dragonheart.TwitchHotKeys.Styling.StyleController">
+  <children>
+    <MenuBar layoutX="0.0" layoutY="0.0" prefWidth="820.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#newFromMenu" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#loadSaved" text="Load Saved Config" />
+            <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#aboutLink" text="About" />
+            <MenuItem mnemonicParsing="false" onAction="#gitHubLink" text="GitHub" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <ComboBox fx:id="pickSkinDropDown" layoutX="270.0" layoutY="245.0" onAction="#previewCSS" prefHeight="21.0" prefWidth="260.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="dark" />
+          <String fx:value="bright" />
+          <String fx:value="weeb" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Text layoutX="244.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current skin is">
+      <font>
+        <Font size="50.0" fx:id="x1" />
+      </font>
+    </Text>
+    <Text fx:id="currentSkinText" font="$x1" layoutX="356.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="###" />
+    <Button layoutX="378.0" layoutY="290.0" mnemonicParsing="false" onMouseReleased="#setNewDefaultSkin" text="Save" />
+    <Text layoutX="96.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick new skin from premades" />
+    <TextField fx:id="customFromFileBox" layoutX="270.0" layoutY="361.0" prefWidth="260.0" promptText="C:\Users\User\Downloads\tomato.css" />
+    <Text layoutX="118.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Import cutsom from file" />
+    <Button layoutX="377.0" layoutY="404.0" mnemonicParsing="false" onMouseReleased="#loadFromFile" text="Load" />
+    <Button layoutX="339.0" layoutY="528.0" mnemonicParsing="false" onMouseReleased="#goToCreateNew" text="Create new custom" />
+  </children>
+</AnchorPane>

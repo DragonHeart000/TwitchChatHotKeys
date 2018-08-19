@@ -7,6 +7,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import ninja.dragonheart.TwitchHotKeys.Welcome.Welcome;
@@ -46,8 +48,21 @@ public class Main extends Application{
 		Scene scene = new Scene(twitchChatHotKeysSetup, 800, 600);
 		stage.setScene(scene);
 		stage.setResizable(false);
-		scene.getStylesheets().add("default.css"); //Set this dynamically based on user preference
-		scene.getStylesheets().add(getClass().getResource("dark.css").toExternalForm());
+		
+		if (FileHandleing.exists("C://TwitchChatHotKeys/styles/set style.bin")){
+			try {
+				scene.getStylesheets().add(getClass().getResource(FileHandleing.readInString("C://TwitchChatHotKeys/styles/set style.bin")).toExternalForm());
+			} catch (Exception e){
+				ErrorHandling.error(e, "Something has gone wrong with your skin! Likely this was caused by the skin being deleted.");
+				scene.getStylesheets().add(getClass().getResource("Styling/PreMades/dark.css").toExternalForm()); //Default is dark
+			}
+		} else {
+			scene.getStylesheets().add(getClass().getResource("Styling/PreMades/dark.css").toExternalForm()); //Default is dark
+		}
+		
+		//scene.getStylesheets().add("default.css");
+		
+		//TODO make icon
 		//stage.getIcons().add(new Image(getClass().getResourceAsStream("tempiconwhilstmakingit.png")));
 
 		 stage.setOnHidden(event -> {

@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 
 public class FileHandleing {
 	
+	/////////////////////////////////////Checking///////////////////////////////////////
+	
 	public static boolean exists(String name){
 		checkDir();
 		File temp = new File(name);
@@ -30,8 +32,22 @@ public class FileHandleing {
 			}
 			return false;
 		}
+		
+		if (!new File("C://TwitchChatHotKeys/styles").exists()){
+			try {
+				Files.createDirectories(Paths.get("C://TwitchChatHotKeys/styles"));
+			} catch (IOException e) {
+				System.out.println("ERROR: IOException when creating path C://TwitchChatHotKeys");
+				ErrorHandling.error(e, "ERROR: IOException when creating path C://TwitchChatHotKeys");
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
 		return true;
 	}
+	
+	/////////////////////////////////////Write out///////////////////////////////////////
 	
 	public static void writeOutUserSettings(UserSettings toWrite, String filePath){
 		checkDir();
@@ -46,6 +62,21 @@ public class FileHandleing {
 		} 
 	}
 	
+	public static void writeOutString(String toWrite, String filePath){ //Used for writing out skin preference but has generic name for possible future uses
+		checkDir();
+		try {
+			ObjectOutputStream os=new ObjectOutputStream(new FileOutputStream(filePath)); //File path should look as such C://TwitchChatHotKeys/styles/set style.bin
+			os.writeObject(toWrite); //Writes the given object to file
+			os.close();
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when writing out user settings!");
+			ErrorHandling.error(e, "ERROR: IOException when writing out user settings!");
+			e.printStackTrace();
+		} 
+	}
+	
+	/////////////////////////////////////Read in///////////////////////////////////////
+	
 	public static UserSettings readInUserSettings(String fileName){
 		checkDir();
 		UserSettings settingsToReturn=null;
@@ -54,16 +85,37 @@ public class FileHandleing {
 			try {
 				settingsToReturn=(UserSettings) is.readObject(); //Reads the object
 			} catch (ClassNotFoundException e) {
+				ErrorHandling.error(e, "ERROR: ClassNotFoundException when reading in channel settings!");
 				System.out.println("ERROR: ClassNotFoundException when reading in channel settings!");
 				e.printStackTrace();
 			}
 			is.close();
 		} catch (IOException e) {
+			ErrorHandling.error(e, "ERROR: IOException when reading in channel settings!");
 			System.out.println("ERROR: IOException when reading in channel settings!");
 			e.printStackTrace();
 		}
 		
 		return new UserSettings(settingsToReturn.getUserName(), settingsToReturn.getOauth(), settingsToReturn.getMacros());
+	}
+	
+	public static String readInString(String fileName){
+		checkDir();
+		String stringToReturn="";
+		try {
+			ObjectInputStream is=new ObjectInputStream(new FileInputStream(fileName));
+			stringToReturn=(String) is.readObject(); //Reads the object
+			is.close();
+		} catch (ClassNotFoundException e) {
+			ErrorHandling.error(e, "ERROR: IOException when reading in!");
+			e.printStackTrace();
+		} catch (IOException e) {
+			ErrorHandling.error(e, "ERROR: IOException when reading in channel settings!");
+			System.out.println("ERROR: IOException when reading in channel settings!");
+			e.printStackTrace();
+		}
+		
+		return stringToReturn;
 	}
 
 }
