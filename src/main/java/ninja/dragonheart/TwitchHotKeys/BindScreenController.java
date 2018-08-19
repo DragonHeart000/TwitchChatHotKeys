@@ -3,6 +3,10 @@ package ninja.dragonheart.TwitchHotKeys;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.pircbotx.Configuration;
+import org.pircbotx.PircBotX;
+import org.pircbotx.exception.IrcException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -101,25 +105,42 @@ public class BindScreenController {
 	/////////////////////////////////////Bind commands///////////////////////////////////////
 	
 	public void makeNewBind(){
-		newBindInPut.setText("..."); //This does not change, it is supposed to change to prompt the user to hit a key
-		lastKeyPressed=KeyListener.getNextKey().getRawCode();
-		newBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+		if (!newBindInPut.equals("...")){
+			newBindInPut.setText("..."); //This does not change, it is supposed to change to prompt the user to hit a key
+			Thread bindListener=new Thread(){
+				@Override
+				public void run(){
+					lastKeyPressed=KeyListener.getNextKey().getRawCode();
+					newBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+					Thread.currentThread().interrupt();
+					return;
+				}
+			};
+			bindListener.start();
+		}
+		
 	}
 	
 	public void saveNewBind(){
-		if (!Main.checkMacro(lastKeyPressed).equals("NO OUTPUT")){
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("That key is already bound");
-			alert.setHeaderText(null);
-			alert.setContentText("If you would like to see what it is bound to use the check macro feature.");
-			alert.showAndWait();
-		} else if (newBindInPut.equals("BLANK")){
+		if (newBindInPut.getText().equals("...")){
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Keybind input feild is blank");
 			alert.setHeaderText(null);
 			alert.setContentText("Please click the \"Click to set bind\" button and then a key on your keyboard to set this.");
 			alert.showAndWait();
-		} else if (newBindOutPut.equals("")){
+		} else if (!Main.checkMacro(lastKeyPressed).equals("NO OUTPUT")){
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("That key is already bound");
+			alert.setHeaderText(null);
+			alert.setContentText("If you would like to see what it is bound to use the check macro feature.");
+			alert.showAndWait();
+		} else if (newBindInPut.getText().equals("BLANK")){
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Keybind input feild is blank");
+			alert.setHeaderText(null);
+			alert.setContentText("Please click the \"Click to set bind\" button and then a key on your keyboard to set this.");
+			alert.showAndWait();
+		} else if (newBindOutPut.getText().equals("")){
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Keybind output feild is blank");
 			alert.setHeaderText(null);
@@ -133,30 +154,77 @@ public class BindScreenController {
 	}
 	
 	public void checkNewBind(){
+		if (!checkBindInPut.getText().equals("...")){
 		checkBindOutPut.setText("");
-		lastKeyPressed=KeyListener.getNextKey().getRawCode();
-		if (Main.checkMacro(lastKeyPressed).equals("NO OUTPUT")){
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Not Bound");
-			alert.setHeaderText(null);
-			alert.setContentText("That key is not bound");
-			alert.showAndWait();
+		checkBindInPut.setText("...");
+		Thread bindListener=new Thread(){
+			@Override
+			public void run(){
+				lastKeyPressed=KeyListener.getNextKey().getRawCode();
+				 	if (Main.checkMacro(lastKeyPressed).equals("NO OUTPUT")){
+				 		checkBindOutPut.setText("THAT KEY IS NOT BOUND");
+				 		checkBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+				 	/*	
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Not Bound");
+					alert.setHeaderText(null);
+					alert.setContentText("That key is not bound");
+					alert.showAndWait();
+				 	 */
+				} else {
+					checkBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+					checkBindOutPut.setText(Main.checkMacro(lastKeyPressed));
+				}
+				Thread.currentThread().interrupt();
+				return;
+			}
+		};
+		bindListener.start();
 		} else {
-			checkBindOutPut.setText(Main.checkMacro(lastKeyPressed));
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Too many requests");
+			alert.setHeaderText(null);
+			alert.setContentText("Please hit a key before attempting to check another.");
+			alert.showAndWait();
 		}
 	}
 	
 	public void deleteNewBind(){
-		deleteBindOutPut.setText("");
-		lastKeyPressed=KeyListener.getNextKey().getRawCode();
-		deleteBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
-		deleteBindOutPut.setText(Main.checkMacro(lastKeyPressed));
+		if (!deleteBindInPut.getText().equals("...")){
+			deleteBindInPut.setText("...");
+			Thread bindListener=new Thread(){
+				@Override
+				public void run(){
+					lastKeyPressed=KeyListener.getNextKey().getRawCode();
+					deleteBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+					deleteBindOutPut.setText(Main.checkMacro(lastKeyPressed));
+					Thread.currentThread().interrupt();
+					return;
+				}
+			};
+			bindListener.start();
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Too many requests");
+			alert.setHeaderText(null);
+			alert.setContentText("Please hit a key before attempting to delete another.");
+			alert.showAndWait();
+		}
+		
 	}
 	
 	public void deleteBind(){
-		Main.delMacro(lastKeyPressed);
-		deleteBindInPut.setText("BLANK");
-		deleteBindOutPut.setText("");
+		if (!deleteBindInPut.getText().equals("...")){
+			Main.delMacro(lastKeyPressed);
+			deleteBindInPut.setText("BLANK");
+			deleteBindOutPut.setText("");
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Too early of a request");
+			alert.setHeaderText(null);
+			alert.setContentText("Please hit a key before attempting to delete it.");
+			alert.showAndWait();
+		}
 	}
 	
 	public void bindHelp(){
