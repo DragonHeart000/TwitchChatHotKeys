@@ -4,11 +4,11 @@
 
   <groupId>TwitchHotKeys</groupId>
   <artifactId>TwitchHotKeys</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.3.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>TwitchHotKeys</name>
-  <url>http://dragonheart.ninja</url>
+  <url>https://www.thk.chat</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
