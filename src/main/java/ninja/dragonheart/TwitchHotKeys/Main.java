@@ -55,6 +55,7 @@ public class Main extends Application{
 				scene.getStylesheets().add(getClass().getResource("Styling/PreMades/dark.css").toExternalForm()); //Default is dark
 			}
 		} else {
+			FileHandleing.writeOutString("Styling/PreMades/dark.css", "C://TwitchChatHotKeys/styles/set style.bin"); //Make sure that set style.bin has been writen out and will be able to be read by writing out the default skin to it.
 			scene.getStylesheets().add(getClass().getResource("Styling/PreMades/dark.css").toExternalForm()); //Default is dark
 		}
 		
