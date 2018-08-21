@@ -73,7 +73,9 @@ public class StyleController {
 			loadedSettings=FileHandleing.readInUserSettings("C://TwitchChatHotKeys/savedSettings.bin");
 			Main.setSettings(loadedSettings);
 			Main.setSaveSettings(true);
-			MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth());
+			
+			Main.setChannel("#" + loadedSettings.getUserName().toLowerCase());
+			MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), "#" + loadedSettings.getUserName().toLowerCase());
 			
 			////////Prepare key Listener////////
 			try {

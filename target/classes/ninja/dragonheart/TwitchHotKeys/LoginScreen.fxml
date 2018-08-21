@@ -34,5 +34,10 @@
     <Button layoutX="500.0" layoutY="290.0" mnemonicParsing="false" onMouseReleased="#oauthHelp" text="?" />
     <Button layoutX="378.0" layoutY="341.0" mnemonicParsing="false" onMouseReleased="#start" text="Start" />
     <CheckBox id="saveSettingsCheckbox" fx:id="saveSettingsCheckBox" layoutX="300.0" layoutY="318.0" mnemonicParsing="false" text="Save settings" />
+    <TextField fx:id="channelTextBox" layoutX="300.0" layoutY="535.0" prefWidth="200.0" style="" />
+    <Button fx:id="moreOptionsButton" layoutX="376.0" layoutY="565.0" mnemonicParsing="false" onMouseReleased="#openMoreOptions" style="" text="More" />
+    <Text fx:id="channelText" layoutX="244.0" layoutY="551.0" strokeType="OUTSIDE" strokeWidth="0.0" style="" text="Channel" />
+    <Button fx:id="channelHelpButton" layoutX="500.0" layoutY="535.0" mnemonicParsing="false" onMouseReleased="#channelHelp" style="" text="?" />
+    <CheckBox fx:id="joinMessageToggle" layoutX="281.0" layoutY="507.0" mnemonicParsing="false" style="" text="Turn off join message" />
   </children>
 </AnchorPane>

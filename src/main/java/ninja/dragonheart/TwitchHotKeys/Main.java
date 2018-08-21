@@ -16,6 +16,8 @@ public class Main extends Application{
 	
 	public static UserSettings loadedSettings;
 	public static boolean saveSettings=false;
+	public static String channel;
+	public static boolean doConnectMessage=true;
 	
 	public static void main(String [] args){
 		
@@ -91,6 +93,22 @@ public class Main extends Application{
     
     public static UserSettings getSettings(){
     	return loadedSettings;
+    }
+    
+    public static void setChannel(String toSet){
+    	channel=toSet;
+    }
+    
+    public static String getChannel(){
+		return channel;
+    }
+    
+    public static boolean getDoConnectMessage(){
+    	return doConnectMessage;
+    }
+    
+    public static void setDoConnectMessage(boolean doIt){
+    	doConnectMessage=doIt;
     }
     
     public static void addSettingsMacro(Macro macroToAdd){

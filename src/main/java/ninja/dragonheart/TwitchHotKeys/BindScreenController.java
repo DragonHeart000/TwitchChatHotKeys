@@ -3,10 +3,6 @@ package ninja.dragonheart.TwitchHotKeys;
 import java.io.IOException;
 import java.util.Optional;
 
-import org.pircbotx.Configuration;
-import org.pircbotx.PircBotX;
-import org.pircbotx.exception.IrcException;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -32,6 +28,9 @@ public class BindScreenController {
 	private Text deleteBindInPut;
 	@FXML
 	private TextField deleteBindOutPut;
+	
+	@FXML
+	private TextField newChannel;
 	
 	private int lastKeyPressed;
 	
@@ -236,5 +235,23 @@ public class BindScreenController {
 		alert.showAndWait();
 	}
 	
+	/////////////////////////////////////Channel Switching///////////////////////////////////////
+	
+	public void joinNewChannel(){
+		if (newChannel.getText().toString().equals("")){
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Error");
+			alert.setHeaderText("Channel to join is blank");
+			alert.setContentText("Please enter a channel name to join in the box.");
+			alert.showAndWait();
+		} else if (newChannel.getText().toString().substring(0,1).equals("#")){ //Channels must have a # before them and be lower case
+			MakeBot.joinNewChannel(newChannel.getText().toString().toLowerCase());
+			newChannel.setText(""); //Set text back to blank to show user it worked
+		} else {
+			MakeBot.joinNewChannel("#" + newChannel.getText().toString().toLowerCase());
+			newChannel.setText("");
+		}
+		
+	}
 
 }

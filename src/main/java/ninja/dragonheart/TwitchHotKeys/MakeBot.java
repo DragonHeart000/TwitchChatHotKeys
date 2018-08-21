@@ -11,7 +11,12 @@ public class MakeBot {
 	public static Thread bot=new Thread();
 	public static PircBotX twitchBot=null; //Initialize twitchBot
 	
-	public static void makeNewBot(String name, String oauth){
+	public static String connectedChannel;
+	
+	public static void makeNewBot(String name, String oauth, String channel){
+		connectedChannel=channel;
+		
+		System.out.println(channel);
 		
 		//Configure Twitch bot with given info
 		Configuration twitchConfiguration = new Configuration.Builder()
@@ -21,7 +26,7 @@ public class MakeBot {
 				.addServer("irc.twitch.tv")
 				.setName(name) //Your twitch.tv username
 				.setServerPassword(oauth) //Your oauth password from http://twitchapps.com/tmi
-				.addAutoJoinChannel("#"+name.toLowerCase()) //Some twitch channel
+				.addAutoJoinChannel(channel) //Some twitch channel
 				.addListener(new Listener())
 				.buildConfiguration();
 			
@@ -66,6 +71,12 @@ public class MakeBot {
 	
 	public static boolean checkThread(){
 		return bot.isAlive();
+	}
+	
+	public static void joinNewChannel(String newChannel){
+		twitchBot.sendRaw().rawLine("PART " + connectedChannel);
+		twitchBot.send().joinChannel(newChannel);
+		Main.setChannel(newChannel);
 	}
 
 }

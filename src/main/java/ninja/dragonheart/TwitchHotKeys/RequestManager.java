@@ -36,7 +36,7 @@ public class RequestManager {
 					request.substring(request.indexOf("$$USER")+6, request.length()));
 					//Use recursion to make sure we get every instance of a var and other vars
 		} else {
-			event.getBot().sendIRC().message(loadedSettings.getChannel(), request); //If no special commands send standard message as is
+			event.getBot().sendIRC().message(Main.getChannel(), request); //If no special commands send standard message as is
 		}
 	}
 	

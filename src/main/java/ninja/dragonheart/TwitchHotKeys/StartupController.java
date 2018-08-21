@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +17,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 import ninja.dragonheart.TwitchHotKeys.ErrorHandling;
 
 public class StartupController {
@@ -28,10 +32,36 @@ public class StartupController {
 	private PasswordField oauth;
 	@FXML
 	private CheckBox saveSettingsCheckBox;
+	
 	@FXML
 	private AnchorPane setupPane;
 	
+	/////More Options/////
+	@FXML
+	public Button moreOptionsButton;
+	@FXML
+	public TextField channelTextBox;
+	@FXML
+	public Text channelText;
+	@FXML
+	public Button channelHelpButton;
+	@FXML
+	public CheckBox joinMessageToggle;
+	
 	public UserSettings loadedSettings;
+	
+	public boolean isMoreOptionsShown;
+	
+	/////////////////////////////////////Setup///////////////////////////////////////
+	
+	public void initialize() {
+		channelTextBox.setVisible(false);
+		channelText.setVisible(false);
+		channelHelpButton.setVisible(false);
+		joinMessageToggle.setVisible(false);
+	}
+	
+	/////////////////////////////////////Login///////////////////////////////////////
 	
 	public void start(){
 		if (twitchName.getText().equals("") || oauth.getText().equals("")){
@@ -69,7 +99,26 @@ public class StartupController {
 				} 
 			}
 			Main.setSettings(loadedSettings);
-			MakeBot.makeNewBot(twitchName.getText(), oauth.getText());
+			
+			System.out.println(channelTextBox.getText().toString());
+			
+			if(channelTextBox.getText().toString().equals("")){
+				Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
+				Main.setChannel("#" + twitchName.getText().toLowerCase());
+				MakeBot.makeNewBot(twitchName.getText(), oauth.getText(), "#" + twitchName.getText().toLowerCase());
+			} else {
+				if (channelTextBox.getText().toString().substring(0,1).equals("#")){ //Check if user already put the #
+					Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
+					Main.setChannel("#" + channelTextBox.getText().toString().toLowerCase());
+					MakeBot.makeNewBot(twitchName.getText(), oauth.getText(), channelTextBox.getText().toString().toLowerCase());
+				} else {
+					Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
+					Main.setChannel("#" + channelTextBox.getText().toString().toLowerCase());
+					MakeBot.makeNewBot(twitchName.getText(), oauth.getText(), "#" + channelTextBox.getText().toString().toLowerCase());
+				}
+			}
+			
+			
 			
 			////////Prepare key Listener////////
 			try {
@@ -127,7 +176,22 @@ public class StartupController {
 			loadedSettings=FileHandleing.readInUserSettings("C://TwitchChatHotKeys/savedSettings.bin");
 			Main.setSettings(loadedSettings);
 			Main.setSaveSettings(true);
-			MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth());
+			
+			if(channelTextBox.getText().toString().equals("")){
+				Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
+				Main.setChannel("#" + loadedSettings.getUserName().toLowerCase());
+				MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), "#" + loadedSettings.getUserName().toLowerCase());
+			} else {
+				if (channelTextBox.getText().toString().substring(0,1).equals("#")){ //Check if user already put the #
+					Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
+					Main.setChannel(channelTextBox.getText().toString().toLowerCase());
+					MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), channelTextBox.getText().toString().toLowerCase());
+				} else {
+					Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
+					Main.setChannel("#" + channelTextBox.getText().toString().toLowerCase());
+					MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), "#" + channelTextBox.getText().toString().toLowerCase());
+				}
+			}
 			
 			////////Prepare key Listener////////
 			
@@ -217,6 +281,94 @@ public class StartupController {
 			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from start()");
 			e.printStackTrace();
 		}
+	}
+
+	/////////////////////////////////////More options///////////////////////////////////////
+	
+	public void openMoreOptions(){
+		//Disable the button for 3 seconds to prevent spam. Must use new thread to not stall the thread that manages UI
+		Thread buttonCooldown=new Thread(){
+			@Override
+			public void run(){
+				moreOptionsButton.setDisable(true);
+				
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					ErrorHandling.error(e);
+					e.printStackTrace();
+				}
+				
+				moreOptionsButton.setDisable(false);
+			}
+		};
+		
+		buttonCooldown.start();
+		
+		//Set visibility to true because the first time this is ran it is false
+		if(!isMoreOptionsShown){
+			channelTextBox.setVisible(true);
+			channelText.setVisible(true);
+			channelHelpButton.setVisible(true);
+			joinMessageToggle.setVisible(true);
+		}
+		
+		//Fade in the more options if they are out
+		if (!isMoreOptionsShown){
+			FadeTransition fadeIn = new FadeTransition(Duration.millis(1000), channelTextBox);
+			fadeIn.setFromValue(0.0);
+			fadeIn.setToValue(1.0);
+			fadeIn.play();
+			
+			fadeIn = new FadeTransition(Duration.millis(1000), channelText);
+			fadeIn.setFromValue(0.0);
+			fadeIn.setToValue(1.0);
+			fadeIn.play();
+			
+			fadeIn = new FadeTransition(Duration.millis(1000), channelHelpButton);
+			fadeIn.setFromValue(0.0);
+			fadeIn.setToValue(1.0);
+			fadeIn.play();
+			
+			fadeIn = new FadeTransition(Duration.millis(3000), joinMessageToggle); //Longer time to make it slowly spread out for neat effect
+			fadeIn.setFromValue(0.0);
+			fadeIn.setToValue(1.0);
+			fadeIn.play();
+			
+			isMoreOptionsShown=true; //Variable to keep track of if it was just faded in or out
+		} else { //Fade out the more options if they are in
+			FadeTransition fadeOut = new FadeTransition(Duration.millis(2000), channelTextBox);
+			fadeOut.setFromValue(1.0);
+			fadeOut.setToValue(0.0);
+			fadeOut.play();
+			
+			fadeOut = new FadeTransition(Duration.millis(2000), channelText);
+			fadeOut.setFromValue(1.0);
+			fadeOut.setToValue(0.0);
+			fadeOut.play();
+			
+			fadeOut = new FadeTransition(Duration.millis(2000), channelHelpButton);
+			fadeOut.setFromValue(1.0);
+			fadeOut.setToValue(0.0);
+			fadeOut.play();
+			
+			fadeOut = new FadeTransition(Duration.millis(1000), joinMessageToggle); //Lower time to make it slowly spread out for neat effect
+			fadeOut.setFromValue(1.0);
+			fadeOut.setToValue(0.0);
+			fadeOut.play();
+			
+			isMoreOptionsShown=false;
+		}	
+		
+	}
+	
+	public void channelHelp(){
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Help");
+		alert.setHeaderText("Channel help");
+		alert.setContentText("This option allows you to join someone elses channel rather than your own. Enter their twitch.tv username in here and you will connect to theirs instead."
+				+ " to connect to your own you may just leave this blank.");
+		alert.showAndWait();
 	}
 	
 }

@@ -61,5 +61,9 @@
     <Button layoutX="14.0" layoutY="481.0" mnemonicParsing="false" onMouseReleased="#deleteNewBind" text="Click to set bind" />
     <Text fx:id="deleteBindInPut" fill="$x3" font="$x2" layoutX="133.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLANK" />
     <Button layoutX="759.0" layoutY="31.0" mnemonicParsing="false" onMouseReleased="#bindHelp" text="?" />
+    <Line endX="700.0" layoutX="100.0" layoutY="556.0" startX="-100.0" />
+    <TextField fx:id="newChannel" layoutX="147.0" layoutY="567.0" prefWidth="200.0" promptText="ex: DragonHeart000_" />
+    <Text layoutX="20.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Join different Channel" />
+    <Button layoutX="351.0" layoutY="567.0" mnemonicParsing="false" onMouseReleased="#joinNewChannel" text="Connect" />
   </children>
 </AnchorPane>
