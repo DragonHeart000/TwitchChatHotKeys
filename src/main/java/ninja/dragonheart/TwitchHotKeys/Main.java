@@ -67,6 +67,8 @@ public class Main extends Application{
 		 stage.setOnHidden(event -> {
 			try {
 				//TODO Ensure that everything closes properly
+				System.out.println("Calling thread kill");
+				MakeBot.killThread();
 				Platform.exit();
 			} catch (Exception e){
 				System.out.println("There could be an error as the program did not close properly!");
