@@ -63,5 +63,9 @@ public class MakeBot {
 			//Try catch in order to prevent errors in event that the program is terminated via this method before start() is called
 		}
 	}
+	
+	public static boolean checkThread(){
+		return bot.isAlive();
+	}
 
 }
