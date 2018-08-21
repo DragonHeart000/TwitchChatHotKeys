@@ -125,24 +125,24 @@ public class KeyListener implements NativeKeyListener{
 		if (waiting){
 			lastRequestedKeyPress=e;
 			waiting=false;
-		}
+		} else {
 		
-		
-		for (Macro temp : Main.getSettings().getMacros()){
-			if (temp.getInput() == e.getRawCode()){
-				RequestManager.requestMessageSent(temp.getOutput());
+			for (Macro temp : Main.getSettings().getMacros()){
+				if (temp.getInput() == e.getRawCode()){
+					RequestManager.requestMessageSent(temp.getOutput());
+				}
 			}
+			
+			/*
+			if (NativeKeyEvent.getKeyText(e.getKeyCode()).equals("Pause")){
+				RequestManager.requestMessageSent("/followers 0");
+			} else if (NativeKeyEvent.getKeyText(e.getKeyCode()).equals("Scroll Lock")){
+				RequestManager.requestMessageSent("/followersoff");
+			}
+			*/
+			
+			System.out.println("e.getRawCode(): " + e.getRawCode());
 		}
-		
-		/*
-		if (NativeKeyEvent.getKeyText(e.getKeyCode()).equals("Pause")){
-			RequestManager.requestMessageSent("/followers 0");
-		} else if (NativeKeyEvent.getKeyText(e.getKeyCode()).equals("Scroll Lock")){
-			RequestManager.requestMessageSent("/followersoff");
-		}
-		*/
-		
-		System.out.println("e.getRawCode(): " + e.getRawCode());
 	}
 
 	public void nativeKeyReleased(NativeKeyEvent e) {
