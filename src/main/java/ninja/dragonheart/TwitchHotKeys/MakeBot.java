@@ -8,7 +8,7 @@ import org.pircbotx.exception.IrcException;
 
 public class MakeBot {
 	
-	public static Thread bot=null;
+	public static Thread bot=new Thread();
 	public static PircBotX twitchBot=null; //Initialize twitchBot
 	
 	public static void makeNewBot(String name, String oauth){
