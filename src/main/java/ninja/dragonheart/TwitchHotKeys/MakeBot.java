@@ -29,7 +29,6 @@ public class MakeBot {
 		twitchBot = new PircBotX(twitchConfiguration);
 		
 		bot=new Thread(){
-			@SuppressWarnings("resource")
 			@Override
 			public void run(){
 				//Start with try catch
@@ -52,7 +51,6 @@ public class MakeBot {
 		System.out.println("Attempting to kill threads");
 		try {
 			if (bot.isAlive()){
-				System.out.println("It should do this right");
 				twitchBot.stopBotReconnect(); //Stop the bot from auto reconnecting
 				twitchBot.sendIRC().quitServer(); //Disconnect from server
 				twitchBot.close(); //Force close to ensure it quitsl

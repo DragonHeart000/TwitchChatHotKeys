@@ -130,6 +130,7 @@ public class StartupController {
 			MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth());
 			
 			////////Prepare key Listener////////
+			
 			try {
 				GlobalScreen.registerNativeHook();
 			}

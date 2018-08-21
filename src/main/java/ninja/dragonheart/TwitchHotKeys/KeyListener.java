@@ -9,7 +9,9 @@ public class KeyListener implements NativeKeyListener{
 	
 	private static volatile boolean waiting=false;
 	private static NativeKeyEvent lastRequestedKeyPress;
-	private static ArrayList<CustomKey> keyCodes= new ArrayList<CustomKey>() {{
+	private static ArrayList<CustomKey> keyCodes= new ArrayList<CustomKey>() {
+		private static final long serialVersionUID = 1L;
+	{
 		add(new CustomKey("f1", 112));
 		add(new CustomKey("f2", 113));
 		add(new CustomKey("f3", 114));
@@ -171,6 +173,10 @@ public class KeyListener implements NativeKeyListener{
 			}
 		}
 		return "ERROR NO VALUE FOUND";
+	}
+	
+	public static void endKeyListener(){
+		System.exit(1);
 	}
 	
 }
