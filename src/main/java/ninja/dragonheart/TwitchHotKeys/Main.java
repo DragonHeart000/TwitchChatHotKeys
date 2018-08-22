@@ -1,6 +1,17 @@
 package ninja.dragonheart.TwitchHotKeys;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -8,11 +19,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import ninja.dragonheart.TwitchHotKeys.Welcome.NewUpdate;
 import ninja.dragonheart.TwitchHotKeys.Welcome.Welcome;
 
 
 public class Main extends Application{
+	
+	private static final String VERSION="0.3.7Alpha";
 	
 	public static UserSettings loadedSettings;
 	public static boolean saveSettings=false;
@@ -20,19 +33,68 @@ public class Main extends Application{
 	public static boolean doConnectMessage=true;
 	
 	public static void main(String [] args){
-		
 		if (!FileHandleing.checkDir()){ //Info screen first time you launch the program
 			Welcome.startWelcome();
 		} else {
 			//TODO check if application is already running and only allow one instance.
 			//Start JavaFX application
-			Application.launch(args);
-				
+			//Application.launch(args);
+			
+			
+			JSONObject gitHubJson;
+			try {
+				gitHubJson = readJsonFromUrl("https://api.github.com/repos/DragonHeart000/TwitchChatHotKeys/releases/latest");
+				System.out.println(gitHubJson.toString());
+			    System.out.println(gitHubJson.get("tag_name"));
+			    
+			    if (!FileHandleing.exists("C://TwitchChatHotKeys/update.bin")){ //Make sure the update settings are there
+					FileHandleing.writeOutString("updated", "C://TwitchChatHotKeys/update.bin");
+				}
+			    
+			    if(!VERSION.equals(gitHubJson.get("tag_name")) && !FileHandleing.readInString("C://TwitchChatHotKeys/update.bin").equals("skip")){
+			    	//Not running most recent version && not wanting to skip it
+			    	NewUpdate.startUpdate();
+			    } else {
+			    	Application.launch(args); //If running latest version run program
+			    }
+			    
+			} catch (JSONException e) {
+				ErrorHandling.error(e, "Failed to get most recent version from gitHub because of JSONException. Starting without checking."); //Warn user
+				Application.launch(args); //Start anyway
+			} catch (IOException e) {
+				ErrorHandling.error(e, "Failed to get most recent version from gitHub because of IOException. starting without checking.");
+				Application.launch(args);
+			}
+
 		}
 
 	}
 	
+	/////////////////////////////////////JSON reading///////////////////////////////////////
+
+	private static String readAll(Reader rd) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		int cp;
+		while ((cp = rd.read()) != -1) {
+	    	sb.append((char) cp);
+		}
+		return sb.toString();
+	}
+
+	public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+		InputStream is = new URL(url).openStream();
+		try {
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+			String jsonText = readAll(rd);
+			JSONObject json = new JSONObject(jsonText);
+			return json;
+		} finally {
+			is.close();
+	    }
+	}
 	
+	/////////////////////////////////////JavaFX start///////////////////////////////////////
+	  
 	@Override
     public void start(Stage stage) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
@@ -83,6 +145,9 @@ public class Main extends Application{
 		stage.show();
     }
 	
+	/////////////////////////////////////Data///////////////////////////////////////
+	
+	/////Settings/////
 	public static void setSaveSettings(boolean save){
 		saveSettings=save;
 	}
@@ -95,22 +160,7 @@ public class Main extends Application{
     	return loadedSettings;
     }
     
-    public static void setChannel(String toSet){
-    	channel=toSet;
-    }
-    
-    public static String getChannel(){
-		return channel;
-    }
-    
-    public static boolean getDoConnectMessage(){
-    	return doConnectMessage;
-    }
-    
-    public static void setDoConnectMessage(boolean doIt){
-    	doConnectMessage=doIt;
-    }
-    
+    //Macros//
     public static void addSettingsMacro(Macro macroToAdd){
     	loadedSettings.getMacros().add(macroToAdd);
     	if (saveSettings){
@@ -139,6 +189,24 @@ public class Main extends Application{
     			return;
     		}
     	}
+    }
+    
+    /////Channel/////
+    public static void setChannel(String toSet){
+    	channel=toSet;
+    }
+    
+    public static String getChannel(){
+		return channel;
+    }
+    
+    /////Connection message/////
+    public static boolean getDoConnectMessage(){
+    	return doConnectMessage;
+    }
+    
+    public static void setDoConnectMessage(boolean doIt){
+    	doConnectMessage=doIt;
     }
 
 }
