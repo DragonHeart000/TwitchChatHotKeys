@@ -51,6 +51,7 @@ Skinning is not yet supported, however, the current plan is to let users use any
 
 * [PircBotX](https://github.com/TheLQ/pircbotx) - IRC Library
 * [jnativehook](https://github.com/kwhat/jnativehook) - Key Board Listener
+* [org.json](https://mvnrepository.com/artifact/org.json/json) - JSON file reading for APIs
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [JavaFX Themes](https://github.com/joffrey-bion/javafx-themes) - Temp skin (Dark Modena)
 
