@@ -4,7 +4,7 @@
 
   <groupId>TwitchHotKeys</groupId>
   <artifactId>TwitchHotKeys</artifactId>
-  <version>0.3.7-SNAPSHOT</version>
+  <version>0.4.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>TwitchHotKeys</name>

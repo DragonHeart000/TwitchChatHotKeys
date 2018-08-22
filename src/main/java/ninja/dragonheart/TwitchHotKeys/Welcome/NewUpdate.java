@@ -82,12 +82,12 @@ public class NewUpdate extends Application{
 			Platform.exit();
 		});
 		
-		Button continueBtn=new Button("Never update");
+		Button continueBtn=new Button("Skip update");
 		continueBtn.setTranslateX(323);
 		continueBtn.setTranslateY(350);
 		continueBtn.setOnAction(event -> {
 			doReopen=true;
-			FileHandleing.writeOutString("skip", "C://TwitchChatHotKeys/update.bin");
+			FileHandleing.writeOutString(Main.getNewestVersionNumber(), "C://TwitchChatHotKeys/update.bin");
 			Platform.exit();
 		});
 		

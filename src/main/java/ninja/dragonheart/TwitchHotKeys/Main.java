@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
@@ -25,7 +23,8 @@ import ninja.dragonheart.TwitchHotKeys.Welcome.Welcome;
 
 public class Main extends Application{
 	
-	private static final String VERSION="0.3.7Alpha";
+	private static final String VERSION="0.4.0Alpha";
+	private static String newestVersion="";
 	
 	public static UserSettings loadedSettings;
 	public static boolean saveSettings=false;
@@ -44,14 +43,13 @@ public class Main extends Application{
 			JSONObject gitHubJson;
 			try {
 				gitHubJson = readJsonFromUrl("https://api.github.com/repos/DragonHeart000/TwitchChatHotKeys/releases/latest");
-				System.out.println(gitHubJson.toString());
-			    System.out.println(gitHubJson.get("tag_name"));
+				newestVersion=gitHubJson.get("tag_name").toString();
 			    
 			    if (!FileHandleing.exists("C://TwitchChatHotKeys/update.bin")){ //Make sure the update settings are there
 					FileHandleing.writeOutString("updated", "C://TwitchChatHotKeys/update.bin");
 				}
 			    
-			    if(!VERSION.equals(gitHubJson.get("tag_name")) && !FileHandleing.readInString("C://TwitchChatHotKeys/update.bin").equals("skip")){
+			    if(!VERSION.equals(gitHubJson.get("tag_name")) && !FileHandleing.readInString("C://TwitchChatHotKeys/update.bin").equals(gitHubJson.get("tag_name"))){
 			    	//Not running most recent version && not wanting to skip it
 			    	NewUpdate.startUpdate();
 			    } else {
@@ -207,6 +205,11 @@ public class Main extends Application{
     
     public static void setDoConnectMessage(boolean doIt){
     	doConnectMessage=doIt;
+    }
+    
+    /////Version/////
+    public static String getNewestVersionNumber(){
+    	return newestVersion;
     }
 
 }
