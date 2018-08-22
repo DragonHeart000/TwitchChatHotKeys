@@ -1,23 +1,29 @@
 package ninja.dragonheart.TwitchHotKeys;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
 
-public class BindScreenController {
+public class BindScreenController implements Initializable{
 	
 	//fxml vars
 	@FXML
 	private Text newBindInPut;
 	@FXML
 	private TextField newBindOutPut;
+	@FXML
+	private ComboBox<?> newBindIOutPutnserter;
 	
 	@FXML
 	private Text checkBindInPut;
@@ -34,6 +40,11 @@ public class BindScreenController {
 	
 	private int lastKeyPressed;
 	
+	@Override // and this
+    public void initialize(URL url, ResourceBundle rb) {
+        //TODO
+    }
+	
 	/*
 	 * For the sake of keeping things organized I created another controller for each page
 	 * the issue with this is the menu bar is almost 100% the same throughout (other than loadSaved
@@ -49,7 +60,7 @@ public class BindScreenController {
 	//////File Menu//////
 	
 	public void newFromMenu(){
-		
+		//TODO
 	}
 	
 	public void loadSavedAfterStart(){
@@ -103,6 +114,8 @@ public class BindScreenController {
 	
 	/////////////////////////////////////Bind commands///////////////////////////////////////
 	
+	//////Make Bind//////
+	
 	public void makeNewBind(){
 		if (!newBindInPut.equals("...")){
 			newBindInPut.setText("..."); //This does not change, it is supposed to change to prompt the user to hit a key
@@ -152,6 +165,40 @@ public class BindScreenController {
 		}
 	}
 	
+	public void newBindOutPutInsert(){
+		switch (newBindIOutPutnserter.getValue().toString()){
+			case "Last User" : 
+				newBindOutPut.setText(newBindOutPut.getText() + "$$USER "); //Adds the user var to the output box
+				newBindOutPut.requestFocus(); //Brings focus back to the output box
+				newBindOutPut.end(); //Puts cursor at end of the text
+				break; //you better know what this is
+			case "Last Message" : 
+				newBindOutPut.setText(newBindOutPut.getText() + "$$USERMESSAGE ");
+				newBindOutPut.requestFocus();
+				newBindOutPut.end();
+				break;
+			case "Time" : 
+				newBindOutPut.setText(newBindOutPut.getText() + "$$TIME ");
+				newBindOutPut.requestFocus();
+				newBindOutPut.end();
+				break;
+			case "Date" : 
+				newBindOutPut.setText(newBindOutPut.getText() + "$$DATE ");
+				newBindOutPut.requestFocus();
+				newBindOutPut.end();
+				break;
+			default:
+				//This should never happen but if it does we got a long night of debugging ahead...
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("ERROR");
+				alert.setHeaderText(null);
+				alert.setContentText("This should never be shown, if it comes up please submit a bug report to the github page.");
+				alert.showAndWait();
+		}	
+	}
+	
+	//////Check Bind//////
+	
 	public void checkNewBind(){
 		if (!checkBindInPut.getText().equals("...")){
 		checkBindOutPut.setText("");
@@ -187,6 +234,8 @@ public class BindScreenController {
 			alert.showAndWait();
 		}
 	}
+	
+	//////Delete Bind//////
 	
 	public void deleteNewBind(){
 		if (!deleteBindInPut.getText().equals("...")){
@@ -225,6 +274,8 @@ public class BindScreenController {
 			alert.showAndWait();
 		}
 	}
+	
+	//////Bind help//////
 	
 	public void bindHelp(){
 		//TODO Add more explanation for what you can do and how to do it.
