@@ -39,7 +39,7 @@
     </Text>
     <Line endX="700.0" layoutX="101.0" layoutY="199.0" startX="-100.0" />
     <Button layoutX="14.0" layoutY="122.0" mnemonicParsing="false" onMouseReleased="#makeNewBind" text="Click to set bind" />
-    <Text fx:id="newBindInPut" layoutX="133.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLANK">
+    <Text fx:id="newBindInPut" layoutX="133.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="inputText" text="BLANK">
       <fill>
         <Color blue="1.000" green="0.200" red="0.648" fx:id="x3" />
       </fill>
@@ -53,14 +53,14 @@
     <Text font="$x1" layoutX="34.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check Bind" />
     <Line endX="700.0" layoutX="101.0" layoutY="377.0" startX="-100.0" />
     <Button layoutX="14.0" layoutY="300.0" mnemonicParsing="false" onMouseReleased="#checkNewBind" text="Click to set bind" />
-    <Text fx:id="checkBindInPut" fill="$x3" font="$x2" layoutX="133.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLANK" />
+    <Text fx:id="checkBindInPut" fill="$x3" font="$x2" layoutX="133.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="inputText" text="BLANK" />
     <TextField fx:id="deleteBindOutPut" layoutX="260.0" layoutY="460.0" prefHeight="63.0" prefWidth="451.0" />
     <Text layoutX="260.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OutPut of bind being deleted" />
     <Button layoutX="722.0" layoutY="480.0" mnemonicParsing="false" onMouseReleased="#deleteBind" text="Confirm" />
     <Text layoutX="133.0" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input to delete" />
     <Text font="$x1" layoutX="34.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Bind" />
     <Button layoutX="14.0" layoutY="481.0" mnemonicParsing="false" onMouseReleased="#deleteNewBind" text="Click to set bind" />
-    <Text fx:id="deleteBindInPut" fill="$x3" font="$x2" layoutX="133.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLANK" />
+    <Text fx:id="deleteBindInPut" fill="$x3" font="$x2" layoutX="133.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="inputText" text="BLANK" />
     <Button layoutX="759.0" layoutY="31.0" mnemonicParsing="false" onMouseReleased="#bindHelp" text="?" />
     <Line endX="700.0" layoutX="100.0" layoutY="556.0" startX="-100.0" />
     <TextField fx:id="newChannel" layoutX="147.0" layoutY="567.0" prefWidth="200.0" promptText="ex: DragonHeart000_" />

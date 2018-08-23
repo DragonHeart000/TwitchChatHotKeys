@@ -1,0 +1,72 @@
+/*
+ * This is an adjustment of the original modena.css for a consistent dark theme.
+ * Original modena.css here: https://gist.github.com/maxd/63691840fc372f22f470.
+ * 
+ * Theme from: https://github.com/joffrey-bion/javafx-themes
+ */
+
+/* Redefine base colors */
+.root {
+	-fx-background-image: none;
+	
+    -fx-base: #000000;
+    -fx-background: #000000;
+
+    /* make controls (buttons, thumb, etc.) slightly lighter */
+    -fx-color: #FFFFFF;
+
+    /* text fields and table rows background */
+    -fx-control-inner-background: rgb(20, 20, 20);
+    /* version of -fx-control-inner-background for alternative rows */
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 2.5%);
+
+    -fx-text-fill: #FFFFFF;
+    -fx-light-text-color: #FFFFFF;
+    -fx-mid-text-color: #FFFFFF;
+    -fx-dark-text-color: #FFFFFF;
+
+}
+
+.toolbar{
+	
+}
+
+.text{
+	-fx-text-fill: #FFFFFF;
+}
+
+.button{
+	-fx-background-color: #000000;
+	-fx-padding: 5px 10px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 0;
+    -fx-border-color: #FFFFFF;
+}
+
+.button:hover{
+	/*-fx-background-color: #319fb2;*/
+	-fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
+}
+
+.button:pressed{
+	-fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+/* Fix derived prompt color for text fields */
+.text-input {
+	-fx-background: #000000;
+    -fx-prompt-text-fill: #FFFFFF;
+}
+
+/* Keep prompt invisible when focused (above color fix overrides it) */
+.text-input:focused {
+    -fx-prompt-text-fill: transparent;
+}
+
+.text-field {
+	-fx-background: #000000;
+	-fx-background-color: #000000;
+	-fx-border-color: #FFFFFF;
+}

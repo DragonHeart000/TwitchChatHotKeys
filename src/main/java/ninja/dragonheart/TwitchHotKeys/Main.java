@@ -39,7 +39,6 @@ public class Main extends Application{
 			//Start JavaFX application
 			//Application.launch(args);
 			
-			
 			JSONObject gitHubJson;
 			try {
 				gitHubJson = readJsonFromUrl("https://api.github.com/repos/DragonHeart000/TwitchChatHotKeys/releases/latest");
@@ -114,11 +113,11 @@ public class Main extends Application{
 				scene.getStylesheets().add(getClass().getResource(FileHandleing.readInString("C://TwitchChatHotKeys/styles/set style.bin")).toExternalForm());
 			} catch (Exception e){
 				ErrorHandling.error(e, "Something has gone wrong with your skin! Likely this was caused by the skin being deleted.");
-				scene.getStylesheets().add(getClass().getResource("Styling/PreMades/dark.css").toExternalForm()); //Default is dark
+				scene.getStylesheets().add(getClass().getResource("Styling/PreMades/Slip Stream.css").toExternalForm()); //Slip Stream is dark
 			}
 		} else {
 			FileHandleing.writeOutString("Styling/PreMades/dark.css", "C://TwitchChatHotKeys/styles/set style.bin"); //Make sure that set style.bin has been writen out and will be able to be read by writing out the default skin to it.
-			scene.getStylesheets().add(getClass().getResource("Styling/PreMades/dark.css").toExternalForm()); //Default is dark
+			scene.getStylesheets().add(getClass().getResource("Styling/PreMades/Slip Stream.css").toExternalForm()); //Default is dark
 		}
 		
 		//scene.getStylesheets().add("default.css");

@@ -31,6 +31,8 @@
     <ComboBox fx:id="pickSkinDropDown" layoutX="270.0" layoutY="245.0" onAction="#previewCSS" prefHeight="21.0" prefWidth="260.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Slip Stream" />
+          <String fx:value="Terminal" />
           <String fx:value="dark" />
           <String fx:value="bright" />
           <String fx:value="weeb" />
