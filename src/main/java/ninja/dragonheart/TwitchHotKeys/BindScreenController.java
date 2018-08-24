@@ -85,6 +85,7 @@ public class BindScreenController implements Initializable{
 			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from start()");
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public void loadSavedAfterStart(){
