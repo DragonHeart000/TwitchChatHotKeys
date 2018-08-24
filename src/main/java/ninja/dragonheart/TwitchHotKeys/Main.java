@@ -186,7 +186,7 @@ public class Main extends Application{
     			return;
     		}
     	}
-    }
+    }	
     
     /////Channel/////
     public static void setChannel(String toSet){

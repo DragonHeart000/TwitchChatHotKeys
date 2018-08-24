@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -14,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 
 public class BindScreenController implements Initializable{
 	
@@ -38,6 +40,9 @@ public class BindScreenController implements Initializable{
 	@FXML
 	private TextField newChannel;
 	
+	@FXML
+	private AnchorPane mainPane;
+	
 	private int lastKeyPressed;
 	
 	@Override // and this
@@ -60,7 +65,26 @@ public class BindScreenController implements Initializable{
 	//////File Menu//////
 	
 	public void newFromMenu(){
-		//TODO
+		//End current instances of bot and key listener
+		try {
+			System.out.println("Calling thread kill");
+			if (MakeBot.checkThread()){
+				MakeBot.killThread();
+				KeyListener.endKeyListener();
+			}
+		} catch (Exception e){
+			ErrorHandling.error(e, "There could be an error as the program did not close properly!");
+			System.out.println("There could be an error as the program did not close properly!");
+		}
+		System.out.println("Switching scenes");
+		//Switch scene
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("LoginScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from start()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from start()");
+			e.printStackTrace();
+		}
 	}
 	
 	public void loadSavedAfterStart(){

@@ -2,6 +2,8 @@ package ninja.dragonheart.TwitchHotKeys;
 
 import java.util.ArrayList;
 
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
@@ -176,7 +178,12 @@ public class KeyListener implements NativeKeyListener{
 	}
 	
 	public static void endKeyListener(){
-		System.exit(1);
+		try {
+			GlobalScreen.unregisterNativeHook(); //Stop listener
+		} catch (NativeHookException e) {
+			ErrorHandling.error(e, "Failed to stop key listener! Terminating");
+			System.exit(1); //Force close
+		}
 	}
 	
 }

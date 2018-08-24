@@ -45,7 +45,7 @@ To delete a bind you can hit the "Click to set bind" button, hit a key, confirm 
 
 ### Skinning
 
-Skinning is not yet supported, however, the current plan is to let users use any CSS file to skin TwitchChatHotKeys but there will be multiple official skins packaged with it and more to download on my website.
+To skin your program you can go to `file > Change Skin` and select from some premade skins, link your own file, or create a custom one (coming soon).
 
 ## Built With
 
