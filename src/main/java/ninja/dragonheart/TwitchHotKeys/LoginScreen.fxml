@@ -39,5 +39,6 @@
     <Text fx:id="channelText" layoutX="244.0" layoutY="551.0" strokeType="OUTSIDE" strokeWidth="0.0" style="" text="Channel" />
     <Button fx:id="channelHelpButton" layoutX="500.0" layoutY="535.0" mnemonicParsing="false" onMouseReleased="#channelHelp" style="" text="?" />
     <CheckBox fx:id="joinMessageToggle" layoutX="281.0" layoutY="507.0" mnemonicParsing="false" style="" text="Turn off join message" />
+    <Button fx:id="loadSavedButton" layoutX="360.0" layoutY="373.0" mnemonicParsing="false" onMouseReleased="#loadSaved" text="Load Saved" />
   </children>
 </AnchorPane>

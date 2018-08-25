@@ -32,6 +32,8 @@ public class StartupController {
 	private PasswordField oauth;
 	@FXML
 	private CheckBox saveSettingsCheckBox;
+	@FXML
+	private Button loadSavedButton;
 	
 	@FXML
 	private AnchorPane setupPane;
@@ -59,6 +61,15 @@ public class StartupController {
 		channelText.setVisible(false);
 		channelHelpButton.setVisible(false);
 		joinMessageToggle.setVisible(false);
+		
+		loadSavedButton.setVisible(false); //Make button hidden
+		if(FileHandleing.exists("C://TwitchChatHotKeys/savedSettings.bin")){ //if there are settings saved
+			FadeTransition fadeIn = new FadeTransition(Duration.millis(5000), loadSavedButton); //Start fading button in
+			fadeIn.setFromValue(0.0);
+			fadeIn.setToValue(1.0);
+			fadeIn.play();
+			loadSavedButton.setVisible(true); //Make button visible
+		}
 	}
 	
 	/////////////////////////////////////Login///////////////////////////////////////
