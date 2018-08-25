@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ninja.dragonheart.TwitchHotKeys.Controller">
@@ -114,5 +115,36 @@
     <Button layoutX="507.0" layoutY="197.0" mnemonicParsing="false" text="Down" />
     <Button layoutX="467.0" layoutY="197.0" mnemonicParsing="false" text="Left" />
     <Button layoutX="558.0" layoutY="197.0" mnemonicParsing="false" text="Right" />
+    <Line endX="726.0" endY="1.0" layoutX="82.0" layoutY="259.0" startX="-100.0" />
+    <Button layoutX="60.0" layoutY="92.0" mnemonicParsing="false" text="f1" />
+    <Button layoutX="91.0" layoutY="92.0" mnemonicParsing="false" text="f2" />
+    <Button layoutX="122.0" layoutY="92.0" mnemonicParsing="false" text="f3" />
+    <Button layoutX="152.0" layoutY="92.0" mnemonicParsing="false" text="f4" />
+    <Button layoutX="183.0" layoutY="92.0" mnemonicParsing="false" text="f5" />
+    <Button layoutX="214.0" layoutY="92.0" mnemonicParsing="false" text="f6" />
+    <Button layoutX="245.0" layoutY="92.0" mnemonicParsing="false" text="f7" />
+    <Button layoutX="276.0" layoutY="92.0" mnemonicParsing="false" text="f8" />
+    <Button layoutX="307.0" layoutY="92.0" mnemonicParsing="false" text="f9" />
+    <Button layoutX="337.0" layoutY="92.0" mnemonicParsing="false" text="f10" />
+    <Button layoutX="368.0" layoutY="92.0" mnemonicParsing="false" text="f11" />
+    <Button layoutX="399.0" layoutY="92.0" mnemonicParsing="false" text="f12" />
+    <Text layoutX="29.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legend:" />
+    <Button layoutX="76.0" layoutY="49.0" mnemonicParsing="false" styleClass="keyNotBound" text="UnBound" />
+    <Button layoutX="166.0" layoutY="49.0" mnemonicParsing="false" styleClass="keyBound" text="Bound" />
+    <Text layoutX="56.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="checkKeyBindTextOnKeyBoardScreen" text="###">
+      <font>
+        <Font size="30.0" fx:id="x1" />
+      </font>
+    </Text>
+    <Text layoutX="164.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="is bound to say:" />
+    <TextField layoutX="309.0" layoutY="289.0" prefWidth="375.0" />
+    <Text font="$x1" layoutX="56.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="checkKeyBindTextOnKeyBoardScreen" text="###" />
+    <Text layoutX="164.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="is being bound to say:" />
+    <TextField layoutX="309.0" layoutY="349.0" prefWidth="375.0" />
+    <Button layoutX="712.0" layoutY="349.0" mnemonicParsing="false" text="Save" />
+    <Text font="$x1" layoutX="56.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="checkKeyBindTextOnKeyBoardScreen" text="###" />
+    <Text layoutX="164.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="will be deleted" />
+    <TextField layoutX="309.0" layoutY="410.0" prefWidth="375.0" />
+    <Button layoutX="707.0" layoutY="410.0" mnemonicParsing="false" text="Delete" />
   </children>
 </AnchorPane>
