@@ -9,6 +9,7 @@ import org.jnativehook.NativeHookException;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -49,10 +50,22 @@ public class StartupController {
 	public Button channelHelpButton;
 	@FXML
 	public CheckBox joinMessageToggle;
+	@FXML
+	public Button previousChannelsButton1;
+	@FXML
+	public Button previousChannelsButton2;
+	@FXML
+	public Button previousChannelsButton3;
+	@FXML
+	public Button previousChannelsButton4;
+	@FXML
+	public Button previousChannelsButton5;
 	
 	public UserSettings loadedSettings;
 	
 	public boolean isMoreOptionsShown;
+	
+	public ArrayList<String> previousChannels;
 	
 	/////////////////////////////////////Setup///////////////////////////////////////
 	
@@ -62,13 +75,44 @@ public class StartupController {
 		channelHelpButton.setVisible(false);
 		joinMessageToggle.setVisible(false);
 		
+		previousChannelsButton1.setVisible(false);
+		previousChannelsButton2.setVisible(false);
+		previousChannelsButton3.setVisible(false);
+		previousChannelsButton4.setVisible(false);
+		previousChannelsButton5.setVisible(false);
+		
 		loadSavedButton.setVisible(false); //Make button hidden
+		
 		if(FileHandleing.exists("C://TwitchChatHotKeys/savedSettings.bin")){ //if there are settings saved
 			FadeTransition fadeIn = new FadeTransition(Duration.millis(5000), loadSavedButton); //Start fading button in
 			fadeIn.setFromValue(0.0);
 			fadeIn.setToValue(1.0);
 			fadeIn.play();
 			loadSavedButton.setVisible(true); //Make button visible
+		}
+		
+		previousChannels=Main.getPreviousChannels();
+		
+		if(previousChannels != null){
+			if(previousChannels.size() >= 1){
+				previousChannelsButton1.setText(previousChannels.get(0));
+			}
+						
+			if(previousChannels.size() >= 2){
+				previousChannelsButton1.setText(previousChannels.get(1));
+			}
+						
+			if(previousChannels.size() >= 3){
+				previousChannelsButton1.setText(previousChannels.get(2));
+			}
+						
+			if(previousChannels.size() >= 4){
+				previousChannelsButton1.setText(previousChannels.get(3));
+			}
+						
+			if(previousChannels.size() >= 5){
+				previousChannelsButton1.setText(previousChannels.get(4));
+			}
 		}
 	}
 	
@@ -113,18 +157,39 @@ public class StartupController {
 			
 			System.out.println(channelTextBox.getText().toString());
 			
+			Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
+			
 			if(channelTextBox.getText().toString().equals("")){
-				Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
 				Main.setChannel("#" + twitchName.getText().toLowerCase());
 				MakeBot.makeNewBot(twitchName.getText(), oauth.getText(), "#" + twitchName.getText().toLowerCase());
 			} else {
 				if (channelTextBox.getText().toString().substring(0,1).equals("#")){ //Check if user already put the #
-					Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
-					Main.setChannel("#" + channelTextBox.getText().toString().toLowerCase());
+					String channel=channelTextBox.getText().toString().toLowerCase(); //memoization my man!
+					
+					if(previousChannels != null && previousChannels.size() >= 5){
+						previousChannels.remove(4);
+						previousChannels.add(channel);
+						Main.setPreviousChannels(previousChannels);
+					} else {
+						previousChannels.add(channel);
+						Main.setPreviousChannels(previousChannels);
+					}
+					
+					Main.setChannel(channel);
 					MakeBot.makeNewBot(twitchName.getText(), oauth.getText(), channelTextBox.getText().toString().toLowerCase());
 				} else {
-					Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
-					Main.setChannel("#" + channelTextBox.getText().toString().toLowerCase());
+					String channel="#" + channelTextBox.getText().toString().toLowerCase();
+					
+					if(previousChannels != null && previousChannels.size() >= 5){ //Save new channel and make sure only 5 are ever stored
+						previousChannels.remove(4);
+						previousChannels.add(channel);
+						Main.setPreviousChannels(previousChannels);
+					} else {
+						previousChannels.add(channel);
+						Main.setPreviousChannels(previousChannels);
+					}
+					
+					Main.setChannel(channel);
 					MakeBot.makeNewBot(twitchName.getText(), oauth.getText(), "#" + channelTextBox.getText().toString().toLowerCase());
 				}
 			}
@@ -188,18 +253,40 @@ public class StartupController {
 			Main.setSettings(loadedSettings);
 			Main.setSaveSettings(true);
 			
+			Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
+			
 			if(channelTextBox.getText().toString().equals("")){
-				Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
+				
 				Main.setChannel("#" + loadedSettings.getUserName().toLowerCase());
 				MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), "#" + loadedSettings.getUserName().toLowerCase());
 			} else {
 				if (channelTextBox.getText().toString().substring(0,1).equals("#")){ //Check if user already put the #
-					Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
-					Main.setChannel(channelTextBox.getText().toString().toLowerCase());
+					String channel=channelTextBox.getText().toString().toLowerCase();
+					
+					if(previousChannels != null && previousChannels.size() >= 5){
+						previousChannels.remove(4);
+						previousChannels.add(channel);
+						Main.setPreviousChannels(previousChannels);
+					} else {
+						previousChannels.add(channel);
+						Main.setPreviousChannels(previousChannels);
+					}
+					
+					Main.setChannel(channel);
 					MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), channelTextBox.getText().toString().toLowerCase());
 				} else {
-					Main.setDoConnectMessage(!joinMessageToggle.isSelected()); //Saves state of checkbox in static main class
-					Main.setChannel("#" + channelTextBox.getText().toString().toLowerCase());
+					String channel="#" + channelTextBox.getText().toString().toLowerCase();
+					
+					if(previousChannels != null && previousChannels.size() >= 5){
+						previousChannels.remove(4);
+						previousChannels.add(channel);
+						Main.setPreviousChannels(previousChannels);
+					} else {
+						previousChannels.add(channel);
+						Main.setPreviousChannels(previousChannels);
+					}
+					
+					Main.setChannel(channel);
 					MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), "#" + channelTextBox.getText().toString().toLowerCase());
 				}
 			}
@@ -236,7 +323,6 @@ public class StartupController {
 	}
 	
 	public void loadSavedAfterStart(){
-		//TODO end all current running tasks
 		loadSaved();
 	}
 	
@@ -340,7 +426,51 @@ public class StartupController {
 			fadeIn.setFromValue(0.0);
 			fadeIn.setToValue(1.0);
 			fadeIn.play();
+			/////
 			
+			if(previousChannels != null){
+				if(previousChannels.size() >= 1){ //This does not work right with a switch
+					previousChannelsButton1.setVisible(true);
+					fadeIn = new FadeTransition(Duration.millis(1000), previousChannelsButton1);
+					fadeIn.setFromValue(0.0);
+					fadeIn.setToValue(1.0);
+					fadeIn.play();
+				}
+					
+				if(previousChannels.size() >= 2){
+					previousChannelsButton2.setVisible(true);
+					fadeIn = new FadeTransition(Duration.millis(1000), previousChannelsButton2);
+					fadeIn.setFromValue(0.0);
+					fadeIn.setToValue(1.0);
+					fadeIn.play();
+				}
+				
+				if(previousChannels.size() >= 3){
+					previousChannelsButton3.setVisible(true);
+					fadeIn = new FadeTransition(Duration.millis(1000), previousChannelsButton3);
+					fadeIn.setFromValue(0.0);
+					fadeIn.setToValue(1.0);
+					fadeIn.play();
+				}
+					
+				if(previousChannels.size() >= 4){
+					previousChannelsButton4.setVisible(true);
+					fadeIn = new FadeTransition(Duration.millis(1000), previousChannelsButton4);
+					fadeIn.setFromValue(0.0);
+					fadeIn.setToValue(1.0);
+					fadeIn.play();
+				}
+					
+				if(previousChannels.size() >= 5){
+					previousChannelsButton5.setVisible(true);
+					fadeIn = new FadeTransition(Duration.millis(1000), previousChannelsButton5);
+					fadeIn.setFromValue(0.0);
+					fadeIn.setToValue(1.0);
+					fadeIn.play();
+				}
+			}
+			
+			/////
 			fadeIn = new FadeTransition(Duration.millis(3000), joinMessageToggle); //Longer time to make it slowly spread out for neat effect
 			fadeIn.setFromValue(0.0);
 			fadeIn.setToValue(1.0);
@@ -363,6 +493,47 @@ public class StartupController {
 			fadeOut.setToValue(0.0);
 			fadeOut.play();
 			
+		/////
+			
+			if(previousChannels != null){
+				if(previousChannels.size() >= 1){
+					fadeOut = new FadeTransition(Duration.millis(2000), previousChannelsButton1);
+					fadeOut.setFromValue(1.0);
+					fadeOut.setToValue(0.0);
+					fadeOut.play();
+				}
+							
+				if(previousChannels.size() >= 2){
+					fadeOut = new FadeTransition(Duration.millis(2000), previousChannelsButton2);
+					fadeOut.setFromValue(1.0);
+					fadeOut.setToValue(0.0);
+					fadeOut.play();
+				}
+							
+				if(previousChannels.size() >= 3){
+					fadeOut = new FadeTransition(Duration.millis(2000), previousChannelsButton3);
+					fadeOut.setFromValue(1.0);
+					fadeOut.setToValue(0.0);
+					fadeOut.play();
+				}
+							
+				if(previousChannels.size() >= 4){
+					fadeOut = new FadeTransition(Duration.millis(2000), previousChannelsButton4);
+					fadeOut.setFromValue(1.0);
+					fadeOut.setToValue(0.0);
+					fadeOut.play();
+				}
+							
+				if(previousChannels.size() >= 5){
+					fadeOut = new FadeTransition(Duration.millis(2000), previousChannelsButton5);
+					fadeOut.setFromValue(1.0);
+					fadeOut.setToValue(0.0);
+					fadeOut.play();
+				}
+			}
+					
+			/////
+			
 			fadeOut = new FadeTransition(Duration.millis(1000), joinMessageToggle); //Lower time to make it slowly spread out for neat effect
 			fadeOut.setFromValue(1.0);
 			fadeOut.setToValue(0.0);
@@ -380,6 +551,31 @@ public class StartupController {
 		alert.setContentText("This option allows you to join someone elses channel rather than your own. Enter their twitch.tv username in here and you will connect to theirs instead."
 				+ " to connect to your own you may just leave this blank.");
 		alert.showAndWait();
+	}
+	
+	public void setToPreviousChannel(ActionEvent event){
+		switch (event.getSource().toString().substring(32, 33)){
+			case "1" :
+				channelTextBox.setText(previousChannelsButton1.getText());
+				break;
+				
+			case "2" :
+				channelTextBox.setText(previousChannelsButton2.getText());
+				break;
+				
+			case "3" :
+				channelTextBox.setText(previousChannelsButton3.getText());
+				break;
+				
+			case "4" :
+				channelTextBox.setText(previousChannelsButton4.getText());
+				break;
+				
+			case "5" :
+				channelTextBox.setText(previousChannelsButton5.getText());
+				break;
+		}
+		System.out.println(event.getSource().toString().substring(32, 33));
 	}
 	
 }

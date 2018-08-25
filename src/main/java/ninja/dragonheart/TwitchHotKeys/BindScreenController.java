@@ -2,6 +2,7 @@ package ninja.dragonheart.TwitchHotKeys;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -45,9 +46,11 @@ public class BindScreenController implements Initializable{
 	
 	private int lastKeyPressed;
 	
+	public ArrayList<String> previousChannels=Main.getPreviousChannels();
+	
 	@Override // and this
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO
+        
     }
 	
 	/*
@@ -321,10 +324,35 @@ public class BindScreenController implements Initializable{
 			alert.setContentText("Please enter a channel name to join in the box.");
 			alert.showAndWait();
 		} else if (newChannel.getText().toString().substring(0,1).equals("#")){ //Channels must have a # before them and be lower case
-			MakeBot.joinNewChannel(newChannel.getText().toString().toLowerCase());
+			String channel=newChannel.getText().toString().toLowerCase();
+			
+			MakeBot.joinNewChannel(channel);
+			
+			if(previousChannels != null && previousChannels.size() >= 5){
+				previousChannels.remove(4);
+				previousChannels.add(channel);
+				Main.setPreviousChannels(previousChannels);
+			} else {
+				previousChannels.add(channel);
+				Main.setPreviousChannels(previousChannels);
+			}
+			
+			
 			newChannel.setText(""); //Set text back to blank to show user it worked
 		} else {
-			MakeBot.joinNewChannel("#" + newChannel.getText().toString().toLowerCase());
+			String channel="#" + newChannel.getText().toString().toLowerCase();
+			
+			MakeBot.joinNewChannel(channel);
+			
+			if(previousChannels != null && previousChannels.size() >= 5){
+				previousChannels.remove(4);
+				previousChannels.add(channel);
+				Main.setPreviousChannels(previousChannels);
+			} else {
+				previousChannels.add(channel);
+				Main.setPreviousChannels(previousChannels);
+			}
+			
 			newChannel.setText("");
 		}
 		

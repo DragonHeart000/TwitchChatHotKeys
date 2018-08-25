@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +30,7 @@ public class Main extends Application{
 	public static UserSettings loadedSettings;
 	public static boolean saveSettings=false;
 	public static String channel;
+	public static ArrayList<String> previousChannels=new ArrayList<String>();
 	public static boolean doConnectMessage=true;
 	
 	public static void main(String [] args){
@@ -36,17 +38,20 @@ public class Main extends Application{
 			Welcome.startWelcome();
 		} else {
 			//TODO check if application is already running and only allow one instance.
-			//Start JavaFX application
-			//Application.launch(args);
 			
+			//////Check files//////
+			if (!FileHandleing.exists("C://TwitchChatHotKeys/update.bin")){ //Make sure the update settings are there
+				FileHandleing.writeOutString("updated", "C://TwitchChatHotKeys/update.bin");
+			}
+			if (!FileHandleing.exists("C://TwitchChatHotKeys/PreviousChannels.bin")){
+				FileHandleing.writeOutArray(previousChannels, "C://TwitchChatHotKeys/PreviousChannels.bin");
+			}
+			
+			//////Check for updates//////
 			JSONObject gitHubJson;
 			try {
 				gitHubJson = readJsonFromUrl("https://api.github.com/repos/DragonHeart000/TwitchChatHotKeys/releases/latest");
 				newestVersion=gitHubJson.get("tag_name").toString();
-			    
-			    if (!FileHandleing.exists("C://TwitchChatHotKeys/update.bin")){ //Make sure the update settings are there
-					FileHandleing.writeOutString("updated", "C://TwitchChatHotKeys/update.bin");
-				}
 			    
 			    if(!VERSION.equals(gitHubJson.get("tag_name")) && !FileHandleing.readInString("C://TwitchChatHotKeys/update.bin").equals(gitHubJson.get("tag_name"))){
 			    	//Not running most recent version && not wanting to skip it
@@ -189,12 +194,23 @@ public class Main extends Application{
     }	
     
     /////Channel/////
+    ///Current///
     public static void setChannel(String toSet){
     	channel=toSet;
     }
     
     public static String getChannel(){
 		return channel;
+    }
+    
+    ///previous///
+    public static void setPreviousChannels(ArrayList<String> toSet){
+    	previousChannels=toSet;
+    	FileHandleing.writeOutArray(previousChannels, "C://TwitchChatHotKeys/PreviousChannels.bin");
+    }
+    
+    public static ArrayList<String> getPreviousChannels(){
+    	return previousChannels;
     }
     
     /////Connection message/////
