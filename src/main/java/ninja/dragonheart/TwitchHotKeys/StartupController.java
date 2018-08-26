@@ -99,19 +99,19 @@ public class StartupController {
 			}
 						
 			if(previousChannels.size() >= 2){
-				previousChannelsButton1.setText(previousChannels.get(1));
+				previousChannelsButton2.setText(previousChannels.get(1));
 			}
 						
 			if(previousChannels.size() >= 3){
-				previousChannelsButton1.setText(previousChannels.get(2));
+				previousChannelsButton3.setText(previousChannels.get(2));
 			}
 						
 			if(previousChannels.size() >= 4){
-				previousChannelsButton1.setText(previousChannels.get(3));
+				previousChannelsButton4.setText(previousChannels.get(3));
 			}
 						
 			if(previousChannels.size() >= 5){
-				previousChannelsButton1.setText(previousChannels.get(4));
+				previousChannelsButton5.setText(previousChannels.get(4));
 			}
 		}
 	}
@@ -166,13 +166,15 @@ public class StartupController {
 				if (channelTextBox.getText().toString().substring(0,1).equals("#")){ //Check if user already put the #
 					String channel=channelTextBox.getText().toString().toLowerCase(); //memoization my man!
 					
-					if(previousChannels != null && previousChannels.size() >= 5){
-						previousChannels.remove(4);
-						previousChannels.add(channel);
-						Main.setPreviousChannels(previousChannels);
-					} else {
-						previousChannels.add(channel);
-						Main.setPreviousChannels(previousChannels);
+					if(previousChannels != null && !previousChannels.contains(channel)){ //Only add it if it has not been visited recently
+						if(previousChannels.size() >= 5){
+							previousChannels.remove(0); //Remove oldest element 
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						} else {
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						}
 					}
 					
 					Main.setChannel(channel);
@@ -180,13 +182,15 @@ public class StartupController {
 				} else {
 					String channel="#" + channelTextBox.getText().toString().toLowerCase();
 					
-					if(previousChannels != null && previousChannels.size() >= 5){ //Save new channel and make sure only 5 are ever stored
-						previousChannels.remove(4);
-						previousChannels.add(channel);
-						Main.setPreviousChannels(previousChannels);
-					} else {
-						previousChannels.add(channel);
-						Main.setPreviousChannels(previousChannels);
+					if(previousChannels != null && !previousChannels.contains(channel)){
+						if(previousChannels.size() >= 5){ //Save new channel and make sure only 5 are ever stored
+							previousChannels.remove(0);
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						} else {
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						}
 					}
 					
 					Main.setChannel(channel);
@@ -263,13 +267,15 @@ public class StartupController {
 				if (channelTextBox.getText().toString().substring(0,1).equals("#")){ //Check if user already put the #
 					String channel=channelTextBox.getText().toString().toLowerCase();
 					
-					if(previousChannels != null && previousChannels.size() >= 5){
-						previousChannels.remove(4);
-						previousChannels.add(channel);
-						Main.setPreviousChannels(previousChannels);
-					} else {
-						previousChannels.add(channel);
-						Main.setPreviousChannels(previousChannels);
+					if(previousChannels != null && !previousChannels.contains(channel)){
+						if(previousChannels.size() >= 5){
+							previousChannels.remove(0);
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						} else {
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						}
 					}
 					
 					Main.setChannel(channel);
@@ -277,13 +283,15 @@ public class StartupController {
 				} else {
 					String channel="#" + channelTextBox.getText().toString().toLowerCase();
 					
-					if(previousChannels != null && previousChannels.size() >= 5){
-						previousChannels.remove(4);
-						previousChannels.add(channel);
-						Main.setPreviousChannels(previousChannels);
-					} else {
-						previousChannels.add(channel);
-						Main.setPreviousChannels(previousChannels);
+					if(previousChannels != null && !previousChannels.contains(channel)){
+						if(previousChannels.size() >= 5){
+							previousChannels.remove(0);
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						} else {
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						}
 					}
 					
 					Main.setChannel(channel);

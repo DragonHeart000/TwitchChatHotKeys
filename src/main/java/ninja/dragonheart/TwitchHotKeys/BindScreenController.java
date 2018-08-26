@@ -328,13 +328,15 @@ public class BindScreenController implements Initializable{
 			
 			MakeBot.joinNewChannel(channel);
 			
-			if(previousChannels != null && previousChannels.size() >= 5){
-				previousChannels.remove(4);
-				previousChannels.add(channel);
-				Main.setPreviousChannels(previousChannels);
-			} else {
-				previousChannels.add(channel);
-				Main.setPreviousChannels(previousChannels);
+			if(previousChannels != null && !previousChannels.contains(channel)){
+				if(previousChannels.size() >= 5){
+					previousChannels.remove(0);
+					previousChannels.add(channel);
+					Main.setPreviousChannels(previousChannels);
+				} else {
+					previousChannels.add(channel);
+					Main.setPreviousChannels(previousChannels);
+				}
 			}
 			
 			
@@ -344,13 +346,15 @@ public class BindScreenController implements Initializable{
 			
 			MakeBot.joinNewChannel(channel);
 			
-			if(previousChannels != null && previousChannels.size() >= 5){
-				previousChannels.remove(4);
-				previousChannels.add(channel);
-				Main.setPreviousChannels(previousChannels);
-			} else {
-				previousChannels.add(channel);
-				Main.setPreviousChannels(previousChannels);
+			if(previousChannels != null && !previousChannels.contains(channel)){
+				if(previousChannels.size() >= 5){
+					previousChannels.remove(0);
+					previousChannels.add(channel);
+					Main.setPreviousChannels(previousChannels);
+				} else {
+					previousChannels.add(channel);
+					Main.setPreviousChannels(previousChannels);
+				}
 			}
 			
 			newChannel.setText("");

@@ -45,6 +45,8 @@ public class Main extends Application{
 			}
 			if (!FileHandleing.exists("C://TwitchChatHotKeys/PreviousChannels.bin")){
 				FileHandleing.writeOutArray(previousChannels, "C://TwitchChatHotKeys/PreviousChannels.bin");
+			} else {
+				previousChannels=FileHandleing.readInArray("C://TwitchChatHotKeys/PreviousChannels.bin");
 			}
 			
 			//////Check for updates//////
