@@ -92,8 +92,64 @@ public class BindScreenController implements Initializable{
 	}
 	
 	public void loadSavedAfterStart(){
-		//TODO end all current running tasks
-		//loadSaved();
+		//End current instances of bot and key listener
+		try {
+			System.out.println("Calling thread kill");
+			if (MakeBot.checkThread()){
+				MakeBot.killThread();
+			}
+		} catch (Exception e){
+			ErrorHandling.error(e, "There could be an error as the program did not close properly!");
+			System.out.println("There could be an error as the program did not close properly!");
+		}
+		
+		/////
+		
+		if (FileHandleing.exists("C://TwitchChatHotKeys/savedSettings.bin")){
+			UserSettings loadedSettings=FileHandleing.readInUserSettings("C://TwitchChatHotKeys/savedSettings.bin");
+			Main.setSettings(loadedSettings);
+			Main.setSaveSettings(true);
+			
+			if(newChannel.getText().toString().equals("")){
+				
+				Main.setChannel("#" + loadedSettings.getUserName().toLowerCase());
+				MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), "#" + loadedSettings.getUserName().toLowerCase());
+			} else {
+				if (newChannel.getText().toString().substring(0,1).equals("#")){ //Check if user already put the #
+					String channel=newChannel.getText().toString().toLowerCase();
+					
+					if(previousChannels != null && !previousChannels.contains(channel)){
+						if(previousChannels.size() >= 5){
+							previousChannels.remove(0);
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						} else {
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						}
+					}
+					
+					Main.setChannel(channel);
+					MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), newChannel.getText().toString().toLowerCase());
+				} else {
+					String channel="#" + newChannel.getText().toString().toLowerCase();
+					
+					if(previousChannels != null && !previousChannels.contains(channel)){
+						if(previousChannels.size() >= 5){
+							previousChannels.remove(0);
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						} else {
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						}
+					}
+					
+					Main.setChannel(channel);
+					MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), "#" + newChannel.getText().toString().toLowerCase());
+				}
+			}
+		}
 	}
 	
 	public void quit(){
