@@ -23,11 +23,11 @@ The first time you launch TwitchChatHotKeys you will be greeted with a welcome s
 
 After continuing from there from then on you will go straight to the login screen:
 
-![Login screenshot](/Screenshots/sctl.JPG?raw=true)
+![Login screenshot](/Screenshots/sctl.png?raw=true)
 
 Provide your twitch.tv username and oauth or if you saved it last time go to file>load saved settings (You must do this to load any hotkeys you had saved in the past). After loading you will have this main screen:
 
-![Main screenshot](/Screenshots/sctm.JPG?raw=true)
+![Main screenshot](/Screenshots/sctm.png?raw=true)
 
 The UI is temporary and will be replaced with a better one in the future. Here you can do three new things
 
