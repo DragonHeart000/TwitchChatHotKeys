@@ -306,12 +306,22 @@ public class BindScreenController implements Initializable{
 	//////Bind help//////
 	
 	public void bindHelp(){
-		//TODO Add more explanation for what you can do and how to do it.
-		Alert alert = new Alert(AlertType.INFORMATION);
+		Alert alert = new Alert(AlertType.CONFIRMATION); //Create alert
 		alert.setTitle("Help");
-		alert.setHeaderText("Help");
-		alert.setContentText("To refference the last user type $$USER or @$$USER to @ them!");
-		alert.showAndWait();
+		alert.setHeaderText("For help you can visit the GitHub wiki page.");
+		alert.setContentText("Would you like to open it now?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){ //If user says ok then the website will open otherwise nothing happens
+			String url_open ="https://github.com/DragonHeart000/TwitchChatHotKeys/wiki"; //Set URL to open
+			try {
+				java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
+			} catch (IOException e) {
+				System.out.println("Error opening webpage on dev page!");
+				ErrorHandling.error(e, "Error opening webpage on dev page!");
+				e.printStackTrace();
+			}  //opens the URL in the default browser
+		} 
 	}
 	
 	/////////////////////////////////////Channel Switching///////////////////////////////////////
