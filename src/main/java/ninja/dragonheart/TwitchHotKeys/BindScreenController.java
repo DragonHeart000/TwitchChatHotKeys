@@ -202,7 +202,7 @@ public class BindScreenController implements Initializable{
 	
 	public void makeNewBind(){
 		if (!newBindInPut.equals("...")){
-			newBindInPut.setText("..."); //This does not change, it is supposed to change to prompt the user to hit a key
+			newBindInPut.setText("...");
 			Thread bindListener=new Thread(){
 				@Override
 				public void run(){
@@ -213,6 +213,12 @@ public class BindScreenController implements Initializable{
 				}
 			};
 			bindListener.start();
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Too many requests");
+			alert.setHeaderText(null);
+			alert.setContentText("Please hit a key before attempting to check another.");
+			alert.showAndWait();
 		}
 		
 	}

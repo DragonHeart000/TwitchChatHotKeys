@@ -1,26 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////////////
-/*
-*  This class is not even close to working. Most of the code is pulled straight from
-*  the BindScreenController.java file with only a few edits because for the most part
-*  a large portion of the methods will be similar with only slight tweaks and a few
-*  new added features.
-*  
-*  In it's current state all that has been done to this file is copying over the code
-*  and a few parts I know I won't need have been deleted.
-*  
-*  This class will be used for the KeyBoardScreen page. The page is supposed to propose
-*  a possible change to how binds will be set and allow users to see what keys on their
-*  keyboard have already been bound. I will be finishing up this class soon. If you
-*  were planning on submitting something to the git repo that had to do with this file
-*  do note that this code here is not even close to it's finished state.
-*
-*/
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 package ninja.dragonheart.TwitchHotKeys;
 
 import java.io.IOException;
@@ -28,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -62,6 +40,24 @@ public class KeyBoardBindScreenController {
 	public ArrayList<String> previousChannels = Main.getPreviousChannels();
 	
 	private int lastKeyPressed;
+	
+	private UserSettings loadedSettings;
+	
+	
+	 public void initialize() {
+		 newBindInPut.setText("BLANK");
+		 checkBindInPut.setText("BLANK");
+		 deleteBindInPut.setText("BLANK");
+		 
+		 loadedSettings=Main.getSettings();
+		 
+		 if (loadedSettings.getMacros() != null){
+		    	for (Macro temp : loadedSettings.getMacros()){
+		    		//temp.getInput()
+		    	}
+	    	}
+	 }
+	
 
 	/*
 	 * For the sake of keeping things organized I created another controller for
@@ -212,25 +208,74 @@ public class KeyBoardBindScreenController {
 	}
 
 	/////////////////////////////////////Bind commands///////////////////////////////////////
+	
+	/////////Setting key//////////
+	
+	public void setKey(Event e){
+		/*Some keys show up multiple times on a keyboard but have the same ID
+		 * you are only allowed to have one object per fx:id in an FXML file.
+		 * To get around this for the duplicate ones I have added an $ on the end.
+		 * Then the following code will remove the $ if it is there to effectively
+		 * make them the same.
+		 */
+		String temp=e.getSource().toString().substring(13, 
+				e.getSource().toString().indexOf(","));
+		if(!temp.contains("$")){
+			lastKeyPressed=Integer.parseInt(e.getSource().toString().substring(13, 
+					e.getSource().toString().indexOf(",")));
+		} else {
+			lastKeyPressed=Integer.parseInt(e.getSource().toString().substring(13, 
+					e.getSource().toString().indexOf("$")));
+		}
+		
+		newBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+		checkBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+		deleteBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+		
+		//For check bind
+		checkBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+		if (Main.checkMacro(lastKeyPressed).equals("NO OUTPUT")) {
+			checkBindOutPut.setText("THAT KEY IS NOT BOUND");
+		} else {
+			checkBindOutPut.setText(Main.checkMacro(lastKeyPressed));
+		}
+	}
 
-	////// Make Bind//////
-
-	public void makeNewBind() {
+	public void setKeyViaKeyBoard(){
 		if (!newBindInPut.equals("...")) {
-			newBindInPut.setText("..."); // This does not change, it is supposed to change to prompt the user to hit a key
+			newBindInPut.setText("...");
+			checkBindInPut.setText("...");
+			deleteBindInPut.setText("...");
 			Thread bindListener = new Thread() {
 				@Override
 				public void run() {
+					//Set new key
 					lastKeyPressed = KeyListener.getNextKey().getRawCode();
+				
+					//For new bind
 					newBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+				
+					//For check bind
+					checkBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+					if (Main.checkMacro(lastKeyPressed).equals("NO OUTPUT")) {
+						checkBindOutPut.setText("THAT KEY IS NOT BOUND");
+					} else {
+						checkBindOutPut.setText(Main.checkMacro(lastKeyPressed));
+					}
+				
+					//For delete bind
+					deleteBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
+				
+					//For ending thread
 					Thread.currentThread().interrupt();
 					return;
 				}
 			};
 			bindListener.start();
 		}
-
 	}
+	
+	/////////Bind functions/////////
 
 	public void saveNewBind() {
 		if (newBindInPut.getText().equals("...")) {
@@ -262,67 +307,19 @@ public class KeyBoardBindScreenController {
 		} else {
 			Main.addSettingsMacro(new Macro(lastKeyPressed, newBindOutPut.getText(), null));
 			newBindInPut.setText("BLANK");
+			checkBindInPut.setText("BLANK");
+			deleteBindInPut.setText("BLANK");
 			newBindOutPut.setText("");
-		}
-	}
-
-	////// Check Bind//////
-
-	public void checkNewBind() {
-		if (!checkBindInPut.getText().equals("...")) {
-			checkBindOutPut.setText("");
-			checkBindInPut.setText("...");
-			Thread bindListener = new Thread() {
-				@Override
-				public void run() {
-					lastKeyPressed = KeyListener.getNextKey().getRawCode();
-					if (Main.checkMacro(lastKeyPressed).equals("NO OUTPUT")) {
-						checkBindOutPut.setText("THAT KEY IS NOT BOUND");
-						checkBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
-						/*
-						 * Alert alert = new Alert(AlertType.INFORMATION);
-						 * alert.setTitle("Not Bound");
-						 * alert.setHeaderText(null);
-						 * alert.setContentText("That key is not bound");
-						 * alert.showAndWait();
-						 */
-					} else {
-						checkBindInPut.setText(KeyListener.keyCodeToKeyString(lastKeyPressed));
-						checkBindOutPut.setText(Main.checkMacro(lastKeyPressed));
-					}
-					Thread.currentThread().interrupt();
-					return;
-				}
-			};
-			bindListener.start();
-		} else {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Too many requests");
-			alert.setHeaderText(null);
-			alert.setContentText("Please hit a key before attempting to check another.");
-			alert.showAndWait();
 		}
 	}
 
 	////// Delete Bind//////
 
-	public void deleteNewBind() {
-		if (!deleteBindInPut.getText().equals("...")) {
-			deleteBindInPut.setText("...");
-			
-		} else {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Too many requests");
-			alert.setHeaderText(null);
-			alert.setContentText("Please hit a key before attempting to delete another.");
-			alert.showAndWait();
-		}
-
-	}
-
 	public void deleteBind() {
 		if (!deleteBindInPut.getText().equals("...")) {
 			Main.delMacro(lastKeyPressed);
+			newBindInPut.setText("BLANK");
+			checkBindInPut.setText("BLANK");
 			deleteBindInPut.setText("BLANK");
 		} else {
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -412,4 +409,5 @@ public class KeyBoardBindScreenController {
 			e.printStackTrace();
 		}
 	}
+	
 }
