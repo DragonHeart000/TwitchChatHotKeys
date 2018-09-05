@@ -75,8 +75,7 @@ public class KeyBoardBindScreenController {
 	 * code.
 	 */
 
-	///////////////////////////////////// Menu
-	///////////////////////////////////// Bar///////////////////////////////////////
+	/////////////////////////////////////Menu Bar///////////////////////////////////////
 
 	////// File Menu//////
 
@@ -129,13 +128,7 @@ public class KeyBoardBindScreenController {
 				MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(),
 						"#" + loadedSettings.getUserName().toLowerCase());
 			} else {
-				if (newChannel.getText().toString().substring(0, 1).equals("#")) { // Check
-																					// if
-																					// user
-																					// already
-																					// put
-																					// the
-																					// #
+				if (newChannel.getText().toString().substring(0, 1).equals("#")) { // Check if user already put the #
 					String channel = newChannel.getText().toString().toLowerCase();
 
 					if (previousChannels != null && !previousChannels.contains(channel)) {
@@ -187,9 +180,7 @@ public class KeyBoardBindScreenController {
 		alert.setContentText("Do you wish to proceed");
 
 		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK) { // If user says ok then the website
-												// will open otherwise nothing
-												// happens
+		if (result.get() == ButtonType.OK) { // If user says ok then the website will open otherwise nothing happens
 			String url_open = "https://dragonheart.ninja"; // Set URL to open
 			try {
 				java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
@@ -208,13 +199,8 @@ public class KeyBoardBindScreenController {
 		alert.setContentText("Do you wish to proceed");
 
 		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK) { // If user says ok then the website
-												// will open otherwise nothing
-												// happens
-			String url_open = "https://github.com/DragonHeart000/TwitchChatHotKeys"; // Set
-																						// URL
-																						// to
-																						// open
+		if (result.get() == ButtonType.OK) { // If user says ok then the website will open otherwise nothing happens
+			String url_open = "https://github.com/DragonHeart000/TwitchChatHotKeys"; // Set URL to open
 			try {
 				java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
 			} catch (IOException e) {
@@ -225,16 +211,13 @@ public class KeyBoardBindScreenController {
 		}
 	}
 
-	///////////////////////////////////// Bind
-	///////////////////////////////////// commands///////////////////////////////////////
+	/////////////////////////////////////Bind commands///////////////////////////////////////
 
 	////// Make Bind//////
 
 	public void makeNewBind() {
 		if (!newBindInPut.equals("...")) {
-			newBindInPut.setText("..."); // This does not change, it is supposed
-											// to change to prompt the user to
-											// hit a key
+			newBindInPut.setText("..."); // This does not change, it is supposed to change to prompt the user to hit a key
 			Thread bindListener = new Thread() {
 				@Override
 				public void run() {
@@ -359,9 +342,7 @@ public class KeyBoardBindScreenController {
 		alert.setContentText("Would you like to open it now?");
 
 		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK) { // If user says ok then the website
-												// will open otherwise nothing
-												// happens
+		if (result.get() == ButtonType.OK) { // If user says ok then the website will open otherwise nothing happens
 			String url_open = "https://github.com/DragonHeart000/TwitchChatHotKeys/wiki"; // Set URL to open
 			try {
 				java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
@@ -418,5 +399,17 @@ public class KeyBoardBindScreenController {
 			newChannel.setText("");
 		}
 
+	}
+	
+	/////////////////////////////////////MISC/////////////////////////////////////
+	
+	public void swapView(){
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("MainScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from start()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from start()");
+			e.printStackTrace();
+		}
 	}
 }

@@ -427,5 +427,17 @@ public class BindScreenController implements Initializable{
 		}
 		
 	}
+	
+	/////////////////////////////////////MISC/////////////////////////////////////
+	
+	public void swapView(){
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("KeyBoardScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from start()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from start()");
+			e.printStackTrace();
+		}
+	}
 
 }

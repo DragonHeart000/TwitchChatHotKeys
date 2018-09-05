@@ -76,5 +76,6 @@
         </FXCollections>
       </items>
     </ComboBox>
+    <Button layoutX="579.0" layoutY="567.0" mnemonicParsing="false" onMouseReleased="#swapView" text="swap to the new experimental view" />
   </children>
 </AnchorPane>
