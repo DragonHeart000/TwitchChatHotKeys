@@ -8,10 +8,12 @@ import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -36,6 +38,156 @@ public class KeyBoardBindScreenController {
 
 	@FXML
 	private AnchorPane mainPane;
+	
+	//keyboard buttons
+	@FXML
+	private Button KEY112;
+	@FXML
+	private Button KEY113;
+	@FXML
+	private Button KEY114;
+	@FXML
+	private Button KEY115;
+	@FXML
+	private Button KEY116;
+	@FXML
+	private Button KEY117;
+	@FXML
+	private Button KEY118;
+	@FXML
+	private Button KEY119;
+	@FXML
+	private Button KEY120;
+	@FXML
+	private Button KEY121;
+	@FXML
+	private Button KEY122;
+	@FXML
+	private Button KEY123;
+	@FXML
+	private Button KEY27;
+	@FXML
+	private Button KEY192;
+	@FXML
+	private Button KEY49;
+	@FXML
+	private Button KEY50;
+	@FXML
+	private Button KEY51;
+	@FXML
+	private Button KEY52;
+	@FXML
+	private Button KEY53;
+	@FXML
+	private Button KEY54;
+	@FXML
+	private Button KEY55;
+	@FXML
+	private Button KEY56;
+	@FXML
+	private Button KEY57;
+	@FXML
+	private Button KEY48;
+	@FXML
+	private Button KEY189;
+	@FXML
+	private Button KEY187;
+	@FXML
+	private Button KEY8;
+	
+	
+	
+	@FXML
+	private Button KEY9;
+	@FXML
+	private Button KEY81;
+	@FXML
+	private Button KEY87;
+	@FXML
+	private Button KEY69;
+
+
+
+/*
+ * Just using this as a list of what numbers I still need to add.
+ * 
+	add(new CustomKey("r", 82));
+	add(new CustomKey("t", 84));
+	add(new CustomKey("y", 89));
+	add(new CustomKey("u", 85));
+	add(new CustomKey("i", 73));
+	add(new CustomKey("o", 79));
+	add(new CustomKey("p", 80));
+	add(new CustomKey("[", 219));
+	add(new CustomKey("]", 221));
+	add(new CustomKey("\\", 220));
+	add(new CustomKey("caps lock", 20));
+	add(new CustomKey("a", 65));
+	add(new CustomKey("s", 83));
+	add(new CustomKey("d", 68));
+	add(new CustomKey("f", 70));
+	add(new CustomKey("g", 71));
+	add(new CustomKey("h", 72));
+	add(new CustomKey("j", 74));
+	add(new CustomKey("k", 75));
+	add(new CustomKey("l", 76));
+	add(new CustomKey(";", 186));
+	add(new CustomKey("'", 222));
+	add(new CustomKey("enter", 13));
+	add(new CustomKey("shift", 16));
+	add(new CustomKey("z", 90));
+	add(new CustomKey("x", 88));
+	add(new CustomKey("c", 67));
+	add(new CustomKey("v lock", 86));
+	add(new CustomKey("b", 66));
+	add(new CustomKey("n", 78));
+	add(new CustomKey("m", 77));
+	add(new CustomKey(",", 188));
+	add(new CustomKey(".", 190));
+	add(new CustomKey("/", 191));
+	add(new CustomKey("ctrl", 17));
+	add(new CustomKey("Lwindow", 91));
+	add(new CustomKey("alt", 18));
+	add(new CustomKey("space", 32));
+	add(new CustomKey("Rwindow", 92));
+	add(new CustomKey("menu", 93));
+	
+	add(new CustomKey("print scrn", 44));
+	add(new CustomKey("scroll lock", 145));
+	add(new CustomKey("pause", 19));
+	add(new CustomKey("insert", 45));
+	add(new CustomKey("home", 36));
+	add(new CustomKey("pageU", 33));
+	add(new CustomKey("del", 46));
+	add(new CustomKey("end", 35));
+	add(new CustomKey("pageD", 34));
+	
+	add(new CustomKey("up", 38));
+	add(new CustomKey("down", 40));
+	add(new CustomKey("left", 37));
+	add(new CustomKey("right", 39));
+	
+	add(new CustomKey("num lock", 144));
+	add(new CustomKey("num /", 111));
+	add(new CustomKey("num *", 106));
+	add(new CustomKey("num -", 109));
+	add(new CustomKey("num 7", 103));
+	add(new CustomKey("num 8", 104));
+	add(new CustomKey("num 9", 105));
+	add(new CustomKey("num +", 107));
+	add(new CustomKey("num 4", 100));
+	add(new CustomKey("num 5", 101));
+	add(new CustomKey("num 6", 102));
+	add(new CustomKey("num 1", 97));
+	add(new CustomKey("num 2", 98));
+	add(new CustomKey("num 3", 99));
+	add(new CustomKey("num 0", 96));
+	add(new CustomKey("num .", 110));
+	
+	
+	*/	
+	
+	//Vars
 
 	public ArrayList<String> previousChannels = Main.getPreviousChannels();
 	
@@ -51,11 +203,29 @@ public class KeyBoardBindScreenController {
 		 
 		 loadedSettings=Main.getSettings();
 		 
+		 //Set CSS of every button that is bound to be the bound class
+		 //TODO This and make sure that whenever a new bind is set it adds
+		 //the css also and when a bind is deleted it is removed.
 		 if (loadedSettings.getMacros() != null){
-		    	for (Macro temp : loadedSettings.getMacros()){
-		    		//temp.getInput()
+		    for (Macro temp : loadedSettings.getMacros()){
+		    	for (Node node : mainPane.getChildren()){
+		    		//TODO This if statement throws a null pointer for some reason but I need to sleep right now
+		    		//if ((temp != null) && (node != null) && node.getId().equals("KEY" + temp.getInput())){
+		    			/*
+		    			//test code
+		    			Alert alert = new Alert(AlertType.INFORMATION);
+		    			alert.setTitle("WOW");
+		    			alert.setHeaderText(null);
+		    			alert.setContentText("KEY" + temp.getInput());
+		    			alert.showAndWait();
+		    			*/
+		    			
+		    		//	node.getStyleClass().add("keyBound");
+		    		//}
 		    	}
-	    	}
+		    	//temp.getInput()
+		    }
+	    }
 	 }
 	
 
