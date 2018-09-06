@@ -105,87 +105,148 @@ public class KeyBoardBindScreenController {
 	private Button KEY87;
 	@FXML
 	private Button KEY69;
+	@FXML
+	private Button KEY82;
+	@FXML
+	private Button KEY84;
+	@FXML
+	private Button KEY89;
+	@FXML
+	private Button KEY85;
+	@FXML
+	private Button KEY73;
+	@FXML
+	private Button KEY79;
+	@FXML
+	private Button KEY80;
+	@FXML
+	private Button KEY219;
+	@FXML
+	private Button KEY221;
+	@FXML
+	private Button KEY220;
+	@FXML
+	private Button KEY20;
+	@FXML
+	private Button KEY65;
+	@FXML
+	private Button KEY83;
+	@FXML
+	private Button KEY68;
+	@FXML
+	private Button KEY70;
+	@FXML
+	private Button KEY71;
+	@FXML
+	private Button KEY72;
+	@FXML
+	private Button KEY74;
+	@FXML
+	private Button KEY75;
+	@FXML
+	private Button KEY76;
+	@FXML
+	private Button KEY186;
+	@FXML
+	private Button KEY222;
+	@FXML
+	private Button KEY13;
+	@FXML
+	private Button KEY16;
+	@FXML
+	private Button KEY90;
+	@FXML
+	private Button KEY88;
+	@FXML
+	private Button KEY67;
+	@FXML
+	private Button KEY86;
+	@FXML
+	private Button KEY66;
+	@FXML
+	private Button KEY78;
+	@FXML
+	private Button KEY77;
+	@FXML
+	private Button KEY188;
+	@FXML
+	private Button KEY190;
+	@FXML
+	private Button KEY191;
+	@FXML
+	private Button KEY17;
+	@FXML
+	private Button KEY91;
+	@FXML
+	private Button KEY18;
+	@FXML
+	private Button KEY32;
+	@FXML
+	private Button KEY92;
+	@FXML
+	private Button KEY93;
+	
+	@FXML
+	private Button KEY44;
+	@FXML
+	private Button KEY145;
+	@FXML
+	private Button KEY19;
+	@FXML
+	private Button KEY45;
+	@FXML
+	private Button KEY36;
+	@FXML
+	private Button KEY33;
+	@FXML
+	private Button KEY46;
+	@FXML
+	private Button KEY35;
+	@FXML
+	private Button KEY34;
+	
+	@FXML
+	private Button KEY38;
+	@FXML
+	private Button KEY40;
+	@FXML
+	private Button KEY37;
+	@FXML
+	private Button KEY39;
+	
+	@FXML
+	private Button KEY144;
+	@FXML
+	private Button KEY111;
+	@FXML
+	private Button KEY106;
+	@FXML
+	private Button KEY109;
+	@FXML
+	private Button KEY103;
+	@FXML
+	private Button KEY104;
+	@FXML
+	private Button KEY105;
+	@FXML
+	private Button KEY107;
+	@FXML
+	private Button KEY100;
+	@FXML
+	private Button KEY101;
+	@FXML
+	private Button KEY102;
+	@FXML
+	private Button KEY97;
+	@FXML
+	private Button KEY98;
+	@FXML
+	private Button KEY99;
+	@FXML
+	private Button KEY96;
+	@FXML
+	private Button KEY110;
 
-
-
-/*
- * Just using this as a list of what numbers I still need to add.
- * 
-	add(new CustomKey("r", 82));
-	add(new CustomKey("t", 84));
-	add(new CustomKey("y", 89));
-	add(new CustomKey("u", 85));
-	add(new CustomKey("i", 73));
-	add(new CustomKey("o", 79));
-	add(new CustomKey("p", 80));
-	add(new CustomKey("[", 219));
-	add(new CustomKey("]", 221));
-	add(new CustomKey("\\", 220));
-	add(new CustomKey("caps lock", 20));
-	add(new CustomKey("a", 65));
-	add(new CustomKey("s", 83));
-	add(new CustomKey("d", 68));
-	add(new CustomKey("f", 70));
-	add(new CustomKey("g", 71));
-	add(new CustomKey("h", 72));
-	add(new CustomKey("j", 74));
-	add(new CustomKey("k", 75));
-	add(new CustomKey("l", 76));
-	add(new CustomKey(";", 186));
-	add(new CustomKey("'", 222));
-	add(new CustomKey("enter", 13));
-	add(new CustomKey("shift", 16));
-	add(new CustomKey("z", 90));
-	add(new CustomKey("x", 88));
-	add(new CustomKey("c", 67));
-	add(new CustomKey("v lock", 86));
-	add(new CustomKey("b", 66));
-	add(new CustomKey("n", 78));
-	add(new CustomKey("m", 77));
-	add(new CustomKey(",", 188));
-	add(new CustomKey(".", 190));
-	add(new CustomKey("/", 191));
-	add(new CustomKey("ctrl", 17));
-	add(new CustomKey("Lwindow", 91));
-	add(new CustomKey("alt", 18));
-	add(new CustomKey("space", 32));
-	add(new CustomKey("Rwindow", 92));
-	add(new CustomKey("menu", 93));
-	
-	add(new CustomKey("print scrn", 44));
-	add(new CustomKey("scroll lock", 145));
-	add(new CustomKey("pause", 19));
-	add(new CustomKey("insert", 45));
-	add(new CustomKey("home", 36));
-	add(new CustomKey("pageU", 33));
-	add(new CustomKey("del", 46));
-	add(new CustomKey("end", 35));
-	add(new CustomKey("pageD", 34));
-	
-	add(new CustomKey("up", 38));
-	add(new CustomKey("down", 40));
-	add(new CustomKey("left", 37));
-	add(new CustomKey("right", 39));
-	
-	add(new CustomKey("num lock", 144));
-	add(new CustomKey("num /", 111));
-	add(new CustomKey("num *", 106));
-	add(new CustomKey("num -", 109));
-	add(new CustomKey("num 7", 103));
-	add(new CustomKey("num 8", 104));
-	add(new CustomKey("num 9", 105));
-	add(new CustomKey("num +", 107));
-	add(new CustomKey("num 4", 100));
-	add(new CustomKey("num 5", 101));
-	add(new CustomKey("num 6", 102));
-	add(new CustomKey("num 1", 97));
-	add(new CustomKey("num 2", 98));
-	add(new CustomKey("num 3", 99));
-	add(new CustomKey("num 0", 96));
-	add(new CustomKey("num .", 110));
-	
-	
-	*/	
 	
 	//Vars
 
@@ -203,28 +264,30 @@ public class KeyBoardBindScreenController {
 		 
 		 loadedSettings=Main.getSettings();
 		 
-		 //Set CSS of every button that is bound to be the bound class
-		 //TODO This and make sure that whenever a new bind is set it adds
-		 //the css also and when a bind is deleted it is removed.
 		 if (loadedSettings.getMacros() != null){
 		    for (Macro temp : loadedSettings.getMacros()){
-		    	for (Node node : mainPane.getChildren()){
-		    		//TODO This if statement throws a null pointer for some reason but I need to sleep right now
-		    		//if ((temp != null) && (node != null) && node.getId().equals("KEY" + temp.getInput())){
-		    			/*
-		    			//test code
-		    			Alert alert = new Alert(AlertType.INFORMATION);
-		    			alert.setTitle("WOW");
-		    			alert.setHeaderText(null);
-		    			alert.setContentText("KEY" + temp.getInput());
-		    			alert.showAndWait();
-		    			*/
-		    			
-		    		//	node.getStyleClass().add("keyBound");
-		    		//}
-		    	}
-		    	//temp.getInput()
+		    	changeKeyColour(Integer.toString(temp.getInput()), true);
 		    }
+	    }
+	 }
+	 
+	 public void changeKeyColour(String key, boolean add){
+		 for (Node node : mainPane.getChildren()){
+ 			try {
+		    	if (node.getId().equals("KEY" + key)){
+		    		if(add){
+		    			node.getStyleClass().clear();
+		    			node.getStyleClass().add("button");
+		    			node.getStyleClass().add("keyBound");
+		    		} else {
+		    			node.getStyleClass().clear();
+		    			node.getStyleClass().add("button");
+		    			node.getStyleClass().add("keyNotBound");
+		    		}
+		    	}
+ 			} catch (NullPointerException e){
+ 				//Some of the children do not have an fx:id so it will throw a null pointer and crash unless you handle it
+ 			}
 	    }
 	 }
 	
@@ -480,6 +543,7 @@ public class KeyBoardBindScreenController {
 			checkBindInPut.setText("BLANK");
 			deleteBindInPut.setText("BLANK");
 			newBindOutPut.setText("");
+			changeKeyColour(Integer.toString(lastKeyPressed), true);
 		}
 	}
 
@@ -491,6 +555,7 @@ public class KeyBoardBindScreenController {
 			newBindInPut.setText("BLANK");
 			checkBindInPut.setText("BLANK");
 			deleteBindInPut.setText("BLANK");
+			changeKeyColour(Integer.toString(lastKeyPressed), false);
 		} else {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Too early of a request");

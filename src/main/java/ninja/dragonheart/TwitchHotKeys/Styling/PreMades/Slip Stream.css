@@ -56,6 +56,10 @@
     -fx-scale-x: 0.9;
 }
 
+.keyBound{
+	-fx-background-color: #ffc414;
+}
+
 /* Fix derived prompt color for text fields */
 .text-input {
 	-fx-background: #000000;
