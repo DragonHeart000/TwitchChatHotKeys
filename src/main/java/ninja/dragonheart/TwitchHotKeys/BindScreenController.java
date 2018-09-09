@@ -84,8 +84,8 @@ public class BindScreenController implements Initializable{
 		try {
 			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("LoginScreen.fxml")));
 		} catch (IOException e) {
-			System.out.println("ERROR: IOException when loading AnchorPane from start()");
-			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from start()");
+			System.out.println("ERROR: IOException when loading AnchorPane from newFromMenu()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from newFromMenu()");
 			e.printStackTrace();
 		}
 		
@@ -154,6 +154,18 @@ public class BindScreenController implements Initializable{
 	
 	public void quit(){
 		Platform.exit();
+	}
+	
+	//////View Menu//////
+	
+	public void goToStats(){
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("StatisticsScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from goToStats()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from goToStats()");
+			e.printStackTrace();
+		}
 	}
 	
 	//////Help Menu//////
@@ -440,8 +452,8 @@ public class BindScreenController implements Initializable{
 		try {
 			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("KeyBoardScreen.fxml")));
 		} catch (IOException e) {
-			System.out.println("ERROR: IOException when loading AnchorPane from start()");
-			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from start()");
+			System.out.println("ERROR: IOException when loading AnchorPane from swapView()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from swapView()");
 			e.printStackTrace();
 		}
 	}

@@ -24,7 +24,7 @@ import ninja.dragonheart.TwitchHotKeys.Welcome.Welcome;
 
 public class Main extends Application{
 	
-	private static final String VERSION="0.4.0Alpha";
+	private static final String VERSION="0.5.0Alpha";
 	private static String newestVersion="";
 	
 	public static UserSettings loadedSettings;

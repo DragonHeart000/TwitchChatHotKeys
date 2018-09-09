@@ -258,6 +258,8 @@ public class KeyBoardBindScreenController {
 	
 	
 	 public void initialize() {
+		 checkBindOutPut.setDisable(true);
+		 
 		 newBindInPut.setText("BLANK");
 		 checkBindInPut.setText("BLANK");
 		 deleteBindInPut.setText("BLANK");
