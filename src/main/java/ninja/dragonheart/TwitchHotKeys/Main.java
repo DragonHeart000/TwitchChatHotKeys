@@ -32,6 +32,7 @@ public class Main extends Application{
 	public static String channel;
 	public static ArrayList<String> previousChannels=new ArrayList<String>();
 	public static boolean doConnectMessage=true;
+	public static ArrayList<Chatter> chatters=new ArrayList<Chatter>();
 	
 	public static void main(String [] args){
 		if (!FileHandleing.checkDir()){ //Info screen first time you launch the program
@@ -227,6 +228,15 @@ public class Main extends Application{
     /////Version/////
     public static String getNewestVersionNumber(){
     	return newestVersion;
+    }
+    
+    /////Chatters/////
+    public static ArrayList<Chatter> getChatters(){
+    	return chatters;
+    }
+    
+    public static void updateChatters(ArrayList<Chatter> newChattersList){
+    	chatters=newChattersList;
     }
 
 }
