@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class FileHandleing {
 	
@@ -69,8 +70,21 @@ public class FileHandleing {
 			os.writeObject(toWrite); //Writes the given object to file
 			os.close();
 		} catch (IOException e) {
-			System.out.println("ERROR: IOException when writing out user settings!");
-			ErrorHandling.error(e, "ERROR: IOException when writing out user settings!");
+			System.out.println("ERROR: IOException when writing out string!");
+			ErrorHandling.error(e, "ERROR: IOException when writing out string!");
+			e.printStackTrace();
+		} 
+	}
+	
+	public static <E> void writeOutArray(ArrayList<E> toWrite, String filePath){ //Used for writing out skin preference but has generic name for possible future uses
+		checkDir();
+		try {
+			ObjectOutputStream os=new ObjectOutputStream(new FileOutputStream(filePath)); //File path should look as such C://TwitchChatHotKeys/styles/set style.bin
+			os.writeObject(toWrite); //Writes the given object to file
+			os.close();
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when writing out ArrayList!");
+			ErrorHandling.error(e, "ERROR: IOException when writing out ArrayList!");
 			e.printStackTrace();
 		} 
 	}
@@ -110,8 +124,28 @@ public class FileHandleing {
 			ErrorHandling.error(e, "ERROR: IOException when reading in!");
 			e.printStackTrace();
 		} catch (IOException e) {
-			ErrorHandling.error(e, "ERROR: IOException when reading in channel settings!");
-			System.out.println("ERROR: IOException when reading in channel settings!");
+			ErrorHandling.error(e, "ERROR: IOException when reading in String!");
+			System.out.println("ERROR: IOException when reading in String!");
+			e.printStackTrace();
+		}
+		
+		return stringToReturn;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <E> ArrayList<E> readInArray(String fileName){
+		checkDir();
+		ArrayList<E> stringToReturn = null;
+		try {
+			ObjectInputStream is=new ObjectInputStream(new FileInputStream(fileName));
+			stringToReturn=(ArrayList<E>) is.readObject(); //Reads the object
+			is.close();
+		} catch (ClassNotFoundException e) {
+			ErrorHandling.error(e, "ERROR: IOException when reading in!");
+			e.printStackTrace();
+		} catch (IOException e) {
+			ErrorHandling.error(e, "ERROR: IOException when reading in ArrayList!");
+			System.out.println("ERROR: IOException when reading in ArrayList!");
 			e.printStackTrace();
 		}
 		

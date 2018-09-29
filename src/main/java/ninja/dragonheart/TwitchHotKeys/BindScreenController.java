@@ -2,11 +2,13 @@ package ninja.dragonheart.TwitchHotKeys;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -14,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 
 public class BindScreenController implements Initializable{
 	
@@ -38,11 +41,16 @@ public class BindScreenController implements Initializable{
 	@FXML
 	private TextField newChannel;
 	
+	@FXML
+	private AnchorPane mainPane;
+	
 	private int lastKeyPressed;
+	
+	public ArrayList<String> previousChannels=Main.getPreviousChannels();
 	
 	@Override // and this
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO
+        
     }
 	
 	/*
@@ -60,16 +68,104 @@ public class BindScreenController implements Initializable{
 	//////File Menu//////
 	
 	public void newFromMenu(){
-		//TODO
+		//End current instances of bot and key listener
+		try {
+			System.out.println("Calling thread kill");
+			if (MakeBot.checkThread()){
+				MakeBot.killThread();
+				KeyListener.endKeyListener();
+			}
+		} catch (Exception e){
+			ErrorHandling.error(e, "There could be an error as the program did not close properly!");
+			System.out.println("There could be an error as the program did not close properly!");
+		}
+		System.out.println("Switching scenes");
+		//Switch scene
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("LoginScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from newFromMenu()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from newFromMenu()");
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void loadSavedAfterStart(){
-		//TODO end all current running tasks
-		//loadSaved();
+		//End current instances of bot and key listener
+		try {
+			System.out.println("Calling thread kill");
+			if (MakeBot.checkThread()){
+				MakeBot.killThread();
+			}
+		} catch (Exception e){
+			ErrorHandling.error(e, "There could be an error as the program did not close properly!");
+			System.out.println("There could be an error as the program did not close properly!");
+		}
+		
+		/////
+		
+		if (FileHandleing.exists("C://TwitchChatHotKeys/savedSettings.bin")){
+			UserSettings loadedSettings=FileHandleing.readInUserSettings("C://TwitchChatHotKeys/savedSettings.bin");
+			Main.setSettings(loadedSettings);
+			Main.setSaveSettings(true);
+			
+			if(newChannel.getText().toString().equals("")){
+				
+				Main.setChannel("#" + loadedSettings.getUserName().toLowerCase());
+				MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), "#" + loadedSettings.getUserName().toLowerCase());
+			} else {
+				if (newChannel.getText().toString().substring(0,1).equals("#")){ //Check if user already put the #
+					String channel=newChannel.getText().toString().toLowerCase();
+					
+					if(previousChannels != null && !previousChannels.contains(channel)){
+						if(previousChannels.size() >= 5){
+							previousChannels.remove(0);
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						} else {
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						}
+					}
+					
+					Main.setChannel(channel);
+					MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), newChannel.getText().toString().toLowerCase());
+				} else {
+					String channel="#" + newChannel.getText().toString().toLowerCase();
+					
+					if(previousChannels != null && !previousChannels.contains(channel)){
+						if(previousChannels.size() >= 5){
+							previousChannels.remove(0);
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						} else {
+							previousChannels.add(channel);
+							Main.setPreviousChannels(previousChannels);
+						}
+					}
+					
+					Main.setChannel(channel);
+					MakeBot.makeNewBot(loadedSettings.getUserName(), loadedSettings.getOauth(), "#" + newChannel.getText().toString().toLowerCase());
+				}
+			}
+		}
 	}
 	
 	public void quit(){
 		Platform.exit();
+	}
+	
+	//////View Menu//////
+	
+	public void goToStats(){
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("StatisticsScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from goToStats()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from goToStats()");
+			e.printStackTrace();
+		}
 	}
 	
 	//////Help Menu//////
@@ -118,7 +214,7 @@ public class BindScreenController implements Initializable{
 	
 	public void makeNewBind(){
 		if (!newBindInPut.equals("...")){
-			newBindInPut.setText("..."); //This does not change, it is supposed to change to prompt the user to hit a key
+			newBindInPut.setText("...");
 			Thread bindListener=new Thread(){
 				@Override
 				public void run(){
@@ -129,6 +225,12 @@ public class BindScreenController implements Initializable{
 				}
 			};
 			bindListener.start();
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Too many requests");
+			alert.setHeaderText(null);
+			alert.setContentText("Please hit a key before attempting to check another.");
+			alert.showAndWait();
 		}
 		
 	}
@@ -278,12 +380,22 @@ public class BindScreenController implements Initializable{
 	//////Bind help//////
 	
 	public void bindHelp(){
-		//TODO Add more explanation for what you can do and how to do it.
-		Alert alert = new Alert(AlertType.INFORMATION);
+		Alert alert = new Alert(AlertType.CONFIRMATION); //Create alert
 		alert.setTitle("Help");
-		alert.setHeaderText("Help");
-		alert.setContentText("To refference the last user type $$USER or @$$USER to @ them!");
-		alert.showAndWait();
+		alert.setHeaderText("For help you can visit the GitHub wiki page.");
+		alert.setContentText("Would you like to open it now?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){ //If user says ok then the website will open otherwise nothing happens
+			String url_open ="https://github.com/DragonHeart000/TwitchChatHotKeys/wiki"; //Set URL to open
+			try {
+				java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
+			} catch (IOException e) {
+				System.out.println("Error opening webpage on dev page!");
+				ErrorHandling.error(e, "Error opening webpage on dev page!");
+				e.printStackTrace();
+			}  //opens the URL in the default browser
+		} 
 	}
 	
 	/////////////////////////////////////Channel Switching///////////////////////////////////////
@@ -296,13 +408,54 @@ public class BindScreenController implements Initializable{
 			alert.setContentText("Please enter a channel name to join in the box.");
 			alert.showAndWait();
 		} else if (newChannel.getText().toString().substring(0,1).equals("#")){ //Channels must have a # before them and be lower case
-			MakeBot.joinNewChannel(newChannel.getText().toString().toLowerCase());
+			String channel=newChannel.getText().toString().toLowerCase();
+			
+			MakeBot.joinNewChannel(channel);
+			
+			if(previousChannels != null && !previousChannels.contains(channel)){
+				if(previousChannels.size() >= 5){
+					previousChannels.remove(0);
+					previousChannels.add(channel);
+					Main.setPreviousChannels(previousChannels);
+				} else {
+					previousChannels.add(channel);
+					Main.setPreviousChannels(previousChannels);
+				}
+			}
+			
+			
 			newChannel.setText(""); //Set text back to blank to show user it worked
 		} else {
-			MakeBot.joinNewChannel("#" + newChannel.getText().toString().toLowerCase());
+			String channel="#" + newChannel.getText().toString().toLowerCase();
+			
+			MakeBot.joinNewChannel(channel);
+			
+			if(previousChannels != null && !previousChannels.contains(channel)){
+				if(previousChannels.size() >= 5){
+					previousChannels.remove(0);
+					previousChannels.add(channel);
+					Main.setPreviousChannels(previousChannels);
+				} else {
+					previousChannels.add(channel);
+					Main.setPreviousChannels(previousChannels);
+				}
+			}
+			
 			newChannel.setText("");
 		}
 		
+	}
+	
+	/////////////////////////////////////MISC/////////////////////////////////////
+	
+	public void swapView(){
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("KeyBoardScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from swapView()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from swapView()");
+			e.printStackTrace();
+		}
 	}
 
 }

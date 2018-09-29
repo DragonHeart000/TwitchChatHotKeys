@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ninja.dragonheart.TwitchHotKeys.BindScreenController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ninja.dragonheart.TwitchHotKeys.BindScreenController">
   <children>
     <MenuBar layoutX="0.0" layoutY="0.0" prefWidth="820.0">
       <menus>
@@ -18,6 +18,12 @@
             <MenuItem mnemonicParsing="false" onAction="#newFromMenu" text="New" />
             <MenuItem mnemonicParsing="false" onAction="#loadSavedAfterStart" text="Load Saved Config" />
             <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="View">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#goToStats" text="Statistics" />
+            <MenuItem mnemonicParsing="false" text="Auto responses" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -76,5 +82,6 @@
         </FXCollections>
       </items>
     </ComboBox>
+    <Button layoutX="579.0" layoutY="567.0" mnemonicParsing="false" onMouseReleased="#swapView" text="swap to the new experimental view" />
   </children>
 </AnchorPane>

@@ -1,5 +1,7 @@
 package ninja.dragonheart.TwitchHotKeys;
 
+import java.util.ArrayList;
+
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -17,6 +19,22 @@ public class Listener extends ListenerAdapter{
 		lastUser=event.getUser().getNick();
 		System.out.println(lastUser);
 		lastUserMessage=event.getMessage();
+		
+		//TODO add option to turn logging of since this can be taxing for streams with many chat messages
+		boolean newUser=true;
+		ArrayList<Chatter> tempChattersList = Main.getChatters();
+		for(Chatter person : tempChattersList){
+			if (person.getUserName().equals(lastUser)){
+				newUser=false;
+				person.update(event.getMessage(), event.getTimestamp());
+				Main.updateChatters(tempChattersList);
+				break;
+			}
+		}
+		if (newUser){
+			tempChattersList.add(new Chatter(event.getUser().getNick(), event.getMessage(), event.getTimestamp()));
+			Main.updateChatters(tempChattersList);
+		}
 	}
 	
 	public void onConnect(final ConnectEvent event){

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ninja.dragonheart.TwitchHotKeys.StatisticsController">
+  <children>
+    <MenuBar layoutX="0.0" layoutY="0.0" prefWidth="820.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#newFromMenu" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#loadSavedAfterStart" text="Load Saved Config" />
+            <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#aboutLink" text="About" />
+            <MenuItem mnemonicParsing="false" onAction="#gitHubLink" text="GitHub" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <ListView layoutX="0.0" layoutY="238.0" prefHeight="362.0" prefWidth="150.0" />
+    <LineChart id="LineChart" layoutX="150.0" layoutY="200.0" legendSide="BOTTOM" title="Chat Activity" titleSide="TOP">
+      <xAxis>
+        <CategoryAxis side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+        <NumberAxis side="LEFT" />
+      </yAxis>
+    </LineChart>
+    <ListView layoutX="650.0" layoutY="238.0" prefHeight="362.0" prefWidth="150.0" />
+    <Text layoutX="8.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Most Talketive Users">
+      <font>
+        <Font size="15.0" fx:id="x1" />
+      </font>
+    </Text>
+    <Text font="$x1" layoutX="649.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Most Used Commands" />
+    <Button id="KEY81" layoutX="104.0" layoutY="106.0" mnemonicParsing="false" text="q" />
+    <Button id="KEY87" layoutX="132.0" layoutY="106.0" mnemonicParsing="false" text="w" />
+    <Button id="KEY69" layoutX="161.0" layoutY="106.0" mnemonicParsing="false" text="e" />
+    <Button id="KEY82" layoutX="188.0" layoutY="106.0" mnemonicParsing="false" text="r" />
+    <Button id="KEY84" layoutX="213.0" layoutY="106.0" mnemonicParsing="false" text="t" />
+    <Button id="KEY89" layoutX="238.0" layoutY="106.0" mnemonicParsing="false" text="y" />
+    <Button id="KEY85" layoutX="264.0" layoutY="106.0" mnemonicParsing="false" text="u" />
+    <Button id="KEY73" layoutX="291.0" layoutY="106.0" mnemonicParsing="false" text="i" />
+    <Button id="KEY79" layoutX="314.0" layoutY="106.0" mnemonicParsing="false" text="o" />
+    <Button id="KEY80" layoutX="342.0" layoutY="106.0" mnemonicParsing="false" text="p" />
+    <Button id="KEY219" layoutX="370.0" layoutY="106.0" mnemonicParsing="false" text="[" />
+    <Button id="KEY221" layoutX="394.0" layoutY="106.0" mnemonicParsing="false" text="]" />
+    <Button id="KEY220" layoutX="418.0" layoutY="106.0" mnemonicParsing="false" text="\\" />
+    <Button id="KEY45" layoutX="462.0" layoutY="85.0" mnemonicParsing="false" text="insert" />
+    <Button id="KEY33" layoutX="565.0" layoutY="85.0" mnemonicParsing="false" text="PageU" />
+    <Button id="KEY36" layoutX="512.0" layoutY="85.0" mnemonicParsing="false" text="Home" />
+    <Button id="KEY46" layoutX="462.0" layoutY="107.0" mnemonicParsing="false" prefWidth="50.0" text="Del" />
+    <Button id="KEY34" layoutX="565.0" layoutY="107.0" mnemonicParsing="false" text="PageD" />
+    <Button id="KEY35" layoutX="512.0" layoutY="107.0" mnemonicParsing="false" prefWidth="53.0" text="End" />
+    <Button id="KEY65" layoutX="116.0" layoutY="128.0" mnemonicParsing="false" text="a" />
+    <Button id="KEY83" layoutX="143.0" layoutY="128.0" mnemonicParsing="false" text="s" />
+    <Button id="KEY68" layoutX="169.0" layoutY="128.0" mnemonicParsing="false" text="d" />
+    <Button id="KEY70" layoutX="197.0" layoutY="128.0" mnemonicParsing="false" text="f" />
+    <Button id="KEY71" layoutX="221.0" layoutY="128.0" mnemonicParsing="false" text="g" />
+    <Button id="KEY72" layoutX="249.0" layoutY="128.0" mnemonicParsing="false" text="h" />
+    <Button id="KEY74" layoutX="276.0" layoutY="128.0" mnemonicParsing="false" text="j" />
+    <Button id="KEY75" layoutX="299.0" layoutY="128.0" mnemonicParsing="false" text="k" />
+    <Button id="KEY76" layoutX="325.0" layoutY="128.0" mnemonicParsing="false" text="l" />
+    <Button id="KEY186" layoutX="348.0" layoutY="128.0" mnemonicParsing="false" text=";" />
+    <Button id="KEY222" layoutX="371.0" layoutY="128.0" mnemonicParsing="false" text="'" />
+    <Button id="KEY13" layoutX="394.0" layoutY="128.0" mnemonicParsing="false" prefWidth="49.0" text="Enter" />
+    <Button id="KEY90" layoutX="128.0" layoutY="149.0" mnemonicParsing="false" text="z" />
+    <Button id="KEY88" layoutX="154.0" layoutY="149.0" mnemonicParsing="false" text="x" />
+    <Button id="KEY67" layoutX="180.0" layoutY="149.0" mnemonicParsing="false" text="c" />
+    <Button id="KEY86" layoutX="206.0" layoutY="149.0" mnemonicParsing="false" text="v" />
+    <Button id="KEY66" layoutX="232.0" layoutY="149.0" mnemonicParsing="false" text="b" />
+    <Button id="KEY78" layoutX="260.0" layoutY="149.0" mnemonicParsing="false" text="n" />
+    <Button id="KEY77" layoutX="287.0" layoutY="149.0" mnemonicParsing="false" text="m" />
+    <Button id="KEY188" layoutX="318.0" layoutY="149.0" mnemonicParsing="false" text="," />
+    <Button id="KEY190" layoutX="341.0" layoutY="149.0" mnemonicParsing="false" text="." />
+    <Button id="KEY191" layoutX="364.0" layoutY="149.0" mnemonicParsing="false" text="/" />
+    <Button id="KEY16$" layoutX="389.0" layoutY="149.0" mnemonicParsing="false" prefWidth="53.173828125" text="Shift" />
+    <Button id="KEY" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" text="1" />
+    <Button id="KEY" layoutX="115.0" layoutY="85.0" mnemonicParsing="false" text="2" />
+    <Button id="KEY51" layoutX="142.0" layoutY="85.0" mnemonicParsing="false" text="3" />
+    <Button id="KEY" layoutX="169.0" layoutY="85.0" mnemonicParsing="false" text="4" />
+    <Button id="KEY53" layoutX="195.0" layoutY="85.0" mnemonicParsing="false" text="5" />
+    <Button id="KEY54" layoutX="222.0" layoutY="85.0" mnemonicParsing="false" text="6" />
+    <Button id="KEY55" layoutX="248.0" layoutY="85.0" mnemonicParsing="false" text="7" />
+    <Button id="KEY56" layoutX="275.0" layoutY="85.0" mnemonicParsing="false" text="8" />
+    <Button id="KEY57" layoutX="299.0" layoutY="85.0" mnemonicParsing="false" text="9" />
+    <Button id="KEY48" layoutX="326.0" layoutY="85.0" mnemonicParsing="false" text="0" />
+    <Button id="KEY189" layoutX="353.0" layoutY="85.0" mnemonicParsing="false" text="-" />
+    <Button id="KEY187" layoutX="378.0" layoutY="85.0" mnemonicParsing="false" text="=" />
+    <Button id="KEY8" layoutX="405.0" layoutY="85.0" mnemonicParsing="false" prefWidth="38.0" text="&lt;-" />
+    <Button id="KEY17" layoutX="66.0" layoutY="169.0" mnemonicParsing="false" text="ctrl" />
+    <Button id="KEY91" layoutX="103.0" layoutY="169.0" mnemonicParsing="false" text="Win" />
+    <Button id="KEY18" layoutX="143.0" layoutY="169.0" mnemonicParsing="false" text="alt" />
+    <Button id="KEY32" layoutX="177.0" layoutY="169.0" mnemonicParsing="false" prefWidth="103.0" text="Space" />
+    <Button id="KEY17$" layoutX="280.0" layoutY="169.0" mnemonicParsing="false" text="ctrl" />
+    <Button id="KEY92" layoutX="317.0" layoutY="169.0" mnemonicParsing="false" text="Win" />
+    <Button id="KEY18$" layoutX="409.0" layoutY="169.0" mnemonicParsing="false" text="alt" />
+    <Button id="KEY93" layoutX="358.0" layoutY="169.0" mnemonicParsing="false" text="Menu" />
+    <Button id="KEY16" layoutX="66.0" layoutY="149.0" mnemonicParsing="false" prefWidth="62.0" text="Shift" />
+    <Button id="KEY144" layoutX="638.0" layoutY="85.0" mnemonicParsing="false" text="n" />
+    <Button id="KEY111" layoutX="665.0" layoutY="85.0" mnemonicParsing="false" text="/" />
+    <Button id="KEY106" layoutX="690.0" layoutY="85.0" mnemonicParsing="false" text="*" />
+    <Button id="KEY109" layoutX="716.0" layoutY="85.0" mnemonicParsing="false" prefWidth="27.0" text="-" />
+    <Button id="KEY103" layoutX="638.0" layoutY="106.0" mnemonicParsing="false" text="7" />
+    <Button id="KEY104" layoutX="664.0" layoutY="106.0" mnemonicParsing="false" text="8" />
+    <Button id="KEY105" layoutX="690.0" layoutY="106.0" mnemonicParsing="false" text="9" />
+    <Button id="KEY107" layoutX="714.0" layoutY="106.0" mnemonicParsing="false" prefHeight="42.0" text="+" />
+    <Button id="KEY100" layoutX="638.0" layoutY="127.0" mnemonicParsing="false" text="4" />
+    <Button id="KEY101" layoutX="664.0" layoutY="127.0" mnemonicParsing="false" text="5" />
+    <Button id="KEY102" layoutX="691.0" layoutY="127.0" mnemonicParsing="false" text="6" />
+    <Button id="KEY13" layoutX="715.0" layoutY="149.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="28.0" text="e" />
+    <Button id="KEY97" layoutX="638.0" layoutY="149.0" mnemonicParsing="false" text="1" />
+    <Button id="KEY98" layoutX="664.0" layoutY="149.0" mnemonicParsing="false" text="2" />
+    <Button id="KEY99" layoutX="691.0" layoutY="149.0" mnemonicParsing="false" text="3" />
+    <Button id="KEY96" layoutX="638.0" layoutY="170.0" mnemonicParsing="false" prefWidth="53.0" text="0" />
+    <Button id="KEY110" layoutX="691.0" layoutY="170.0" mnemonicParsing="false" prefWidth="27.0" text="." />
+    <Button id="KEY20" layoutX="66.0" layoutY="127.0" mnemonicParsing="false" prefWidth="50.0" text="cap" />
+    <Button id="KEY9" layoutX="66.0" layoutY="107.0" mnemonicParsing="false" prefWidth="38.0" text="tab" />
+    <Button id="KEY192" layoutX="66.0" layoutY="85.0" mnemonicParsing="false" text="`" />
+    <Button id="KEY38" layoutX="516.0" layoutY="148.0" mnemonicParsing="false" prefWidth="49.0" text="Up" />
+    <Button id="KEY40" layoutX="514.0" layoutY="169.0" mnemonicParsing="false" text="Down" />
+    <Button id="KEY37" layoutX="474.0" layoutY="169.0" mnemonicParsing="false" text="Left" />
+    <Button id="KEY39" layoutX="565.0" layoutY="169.0" mnemonicParsing="false" text="Right" />
+    <Button id="KEY112" layoutX="67.0" layoutY="64.0" mnemonicParsing="false" text="f1" />
+    <Button id="KEY113" layoutX="98.0" layoutY="64.0" mnemonicParsing="false" text="f2" />
+    <Button id="KEY114" layoutX="129.0" layoutY="64.0" mnemonicParsing="false" text="f3" />
+    <Button id="KEY115" layoutX="159.0" layoutY="64.0" mnemonicParsing="false" text="f4" />
+    <Button id="KEY116" layoutX="190.0" layoutY="64.0" mnemonicParsing="false" text="f5" />
+    <Button id="KEY117" layoutX="221.0" layoutY="64.0" mnemonicParsing="false" text="f6" />
+    <Button id="KEY118" layoutX="252.0" layoutY="64.0" mnemonicParsing="false" text="f7" />
+    <Button id="KEY119" layoutX="283.0" layoutY="64.0" mnemonicParsing="false" text="f8" />
+    <Button id="KEY120" layoutX="314.0" layoutY="64.0" mnemonicParsing="false" text="f9" />
+    <Button id="KEY121" layoutX="344.0" layoutY="64.0" mnemonicParsing="false" text="f10" />
+    <Button id="KEY122" layoutX="375.0" layoutY="64.0" mnemonicParsing="false" text="f11" />
+    <Button id="KEY123" layoutX="406.0" layoutY="64.0" mnemonicParsing="false" text="f12" />
+    <Button id="KEY27" layoutX="27.0" layoutY="64.0" mnemonicParsing="false" text="ESC" />
+    <Text layoutX="309.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Used macros heat map">
+      <font>
+        <Font size="20.0" />
+      </font>
+    </Text>
+    <Line endX="744.0" endY="-2.0" layoutX="67.0" layoutY="201.0" startX="-74.0" startY="-2.0" />
+  </children>
+</AnchorPane>

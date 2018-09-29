@@ -23,11 +23,11 @@ The first time you launch TwitchChatHotKeys you will be greeted with a welcome s
 
 After continuing from there from then on you will go straight to the login screen:
 
-![Login screenshot](/Screenshots/sctl.JPG?raw=true)
+![Login screenshot](/Screenshots/sctl.png?raw=true)
 
 Provide your twitch.tv username and oauth or if you saved it last time go to file>load saved settings (You must do this to load any hotkeys you had saved in the past). After loading you will have this main screen:
 
-![Main screenshot](/Screenshots/sctm.JPG?raw=true)
+![Main screenshot](/Screenshots/sctm.png?raw=true)
 
 The UI is temporary and will be replaced with a better one in the future. Here you can do three new things
 
@@ -45,7 +45,7 @@ To delete a bind you can hit the "Click to set bind" button, hit a key, confirm 
 
 ### Skinning
 
-Skinning is not yet supported, however, the current plan is to let users use any CSS file to skin TwitchChatHotKeys but there will be multiple official skins packaged with it and more to download on my website.
+To skin your program you can go to `file > Change Skin` and select from some premade skins, link your own file, or create a custom one (coming soon).
 
 ## Built With
 

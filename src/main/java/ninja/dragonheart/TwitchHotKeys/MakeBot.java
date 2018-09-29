@@ -58,7 +58,7 @@ public class MakeBot {
 			if (bot.isAlive()){
 				twitchBot.stopBotReconnect(); //Stop the bot from auto reconnecting
 				twitchBot.sendIRC().quitServer(); //Disconnect from server
-				twitchBot.close(); //Force close to ensure it quitsl
+				twitchBot.close(); //Force close to ensure it quits
 			} else {
 				System.out.println("BOT IS NOT ALIVE");
 			}
