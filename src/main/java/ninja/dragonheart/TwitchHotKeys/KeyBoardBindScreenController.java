@@ -401,6 +401,38 @@ public class KeyBoardBindScreenController {
 	public void quit() {
 		Platform.exit();
 	}
+	
+	//////View Menu//////
+	
+	public void goToStats(){
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("StatisticsScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from goToStats()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from goToStats()");
+			e.printStackTrace();
+		}
+	}
+	
+	public void goToAutoResponses(){
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("AutoResponseSetting.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from goToStats()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from goToStats()");
+			e.printStackTrace();
+		}
+	}
+	
+	public void goToBindScreen(){
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("MainScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from goToStats()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from goToStats()");
+			e.printStackTrace();
+		}
+	}
 
 	////// Help Menu//////
 

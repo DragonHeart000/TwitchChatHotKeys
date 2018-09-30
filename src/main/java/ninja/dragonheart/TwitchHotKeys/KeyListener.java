@@ -134,21 +134,11 @@ public class KeyListener implements NativeKeyListener{
 					RequestManager.requestMessageSent(temp.getOutput());
 				}
 			}
-			
-			/*
-			if (NativeKeyEvent.getKeyText(e.getKeyCode()).equals("Pause")){
-				RequestManager.requestMessageSent("/followers 0");
-			} else if (NativeKeyEvent.getKeyText(e.getKeyCode()).equals("Scroll Lock")){
-				RequestManager.requestMessageSent("/followersoff");
-			}
-			*/
-			
-			System.out.println("e.getRawCode(): " + e.getRawCode());
 		}
 	}
 
 	public void nativeKeyReleased(NativeKeyEvent e) {
-		System.out.println("Key Released: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
+		//System.out.println("Key Released: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
 	}
 
 	public void nativeKeyTyped(NativeKeyEvent e) {

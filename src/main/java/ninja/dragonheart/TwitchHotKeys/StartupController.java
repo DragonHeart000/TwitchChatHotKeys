@@ -3,6 +3,8 @@ package ninja.dragonheart.TwitchHotKeys;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -210,6 +212,13 @@ public class StartupController {
 
 				System.exit(1);
 			}
+			
+			// Get the logger for "org.jnativehook" and set the level to warning.
+			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+			logger.setLevel(Level.WARNING);
+			// Don't forget to disable the parent handlers.
+			logger.setUseParentHandlers(false);
+			
 			GlobalScreen.addNativeKeyListener(new KeyListener());
 			
 			/////////////Swap scene/////////////
@@ -310,6 +319,13 @@ public class StartupController {
 				
 				System.exit(1);
 			}
+			
+			// Get the logger for "org.jnativehook" and set the level to warning.
+			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+			logger.setLevel(Level.WARNING);
+			// Don't forget to disable the parent handlers.
+			logger.setUseParentHandlers(false);
+						
 			GlobalScreen.addNativeKeyListener(new KeyListener());
 			
 			/////////////Swap scene/////////////

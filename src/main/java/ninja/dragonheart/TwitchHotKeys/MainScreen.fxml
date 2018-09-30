@@ -23,7 +23,8 @@
         <Menu mnemonicParsing="false" text="View">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#goToStats" text="Statistics" />
-            <MenuItem mnemonicParsing="false" text="Auto responses" />
+            <MenuItem mnemonicParsing="false" onAction="#goToAutoResponses" text="Auto responses" />
+            <MenuItem mnemonicParsing="false" onAction="#goToBindScreen" text="Bind Screen" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">

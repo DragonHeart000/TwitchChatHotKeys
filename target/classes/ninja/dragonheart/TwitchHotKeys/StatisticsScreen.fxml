@@ -21,6 +21,13 @@
             <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
           </items>
         </Menu>
+        <Menu mnemonicParsing="false" text="View">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#goToStats" text="Statistics" />
+            <MenuItem mnemonicParsing="false" onAction="#goToAutoResponses" text="Auto responses" />
+            <MenuItem mnemonicParsing="false" onAction="#goToBindScreen" text="Bind Screen" />
+          </items>
+        </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#aboutLink" text="About" />
@@ -152,6 +159,5 @@
       </font>
     </Text>
     <Line endX="744.0" endY="-2.0" layoutX="67.0" layoutY="201.0" startX="-74.0" startY="-2.0" />
-    <Button layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onMouseReleased="#goBack" text="&lt; Back" />
   </children>
 </AnchorPane>

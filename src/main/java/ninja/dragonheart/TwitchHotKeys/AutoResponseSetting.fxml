@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ninja.dragonheart.TwitchHotKeys.AutoResponseSettingController">
+  <children>
+    <MenuBar layoutX="0.0" layoutY="0.0" prefWidth="820.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#newFromMenu" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#loadSavedAfterStart" text="Load Saved Config" />
+            <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="View">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#goToStats" text="Statistics" />
+            <MenuItem mnemonicParsing="false" onAction="#goToAutoResponses" text="Auto responses" />
+            <MenuItem mnemonicParsing="false" onAction="#goToBindScreen" text="Bind Screen" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#aboutLink" text="About" />
+            <MenuItem mnemonicParsing="false" onAction="#gitHubLink" text="GitHub" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <ListView id="autoResponse" fx:id="autoResponseInputListView" layoutX="0.0" layoutY="55.0" prefHeight="291.0" prefWidth="262.0" />
+    <ListView fx:id="autoResponseOutputListView" layoutX="262.0" layoutY="55.0" prefHeight="291.0" prefWidth="538.0" />
+    <Text layoutX="14.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Make New">
+      <font>
+        <Font size="30.0" fx:id="x1" />
+      </font>
+    </Text>
+    <TextField fx:id="newAutoResponseInPut" layoutX="39.0" layoutY="411.0" prefWidth="209.0" />
+    <TextField fx:id="newAutoResponseOutPut" layoutX="276.0" layoutY="411.0" prefWidth="510.0000999999975" />
+    <Text layoutX="39.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Command" />
+    <Text layoutX="276.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Response" />
+    <Button layoutX="741.0" layoutY="441.0" mnemonicParsing="false" onMouseReleased="#makeAutoResponse" text="Save" />
+    <Line endX="703.0" endY="-3.0" layoutX="101.0" layoutY="478.0" startX="-100.0" />
+    <Text font="$x1" layoutX="13.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete" />
+    <TextField fx:id="deleteAutoResponseInPut" layoutX="38.0" layoutY="551.0" prefWidth="209.0" />
+    <Text layoutX="38.0" layoutY="548.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Command" />
+    <Button id="newAutoResponse" layoutX="262.0" layoutY="552.0" mnemonicParsing="false" onMouseReleased="#deleteAutoResponse" text="Delete" />
+    <Text layoutX="13.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Command">
+      <font>
+        <Font size="15.0" fx:id="x2" />
+      </font>
+    </Text>
+    <Text font="$x2" layoutX="276.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Response" />
+    <Line endX="-100.0" endY="-34.0" layoutX="362.0" layoutY="56.0" startX="-100.0" />
+  </children>
+</AnchorPane>

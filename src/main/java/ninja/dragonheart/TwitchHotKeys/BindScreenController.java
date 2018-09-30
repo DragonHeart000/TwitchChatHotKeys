@@ -168,6 +168,29 @@ public class BindScreenController implements Initializable{
 		}
 	}
 	
+	public void goToAutoResponses(){
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("AutoResponseSetting.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from goToStats()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from goToStats()");
+			e.printStackTrace();
+		}
+	}
+	
+	public void goToBindScreen(){
+		//There already
+		/*
+		try {
+			mainPane.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("MainScreen.fxml")));
+		} catch (IOException e) {
+			System.out.println("ERROR: IOException when loading AnchorPane from goToStats()");
+			ErrorHandling.error(e, "ERROR: IOException when loading AnchorPane from goToStats()");
+			e.printStackTrace();
+		}
+		*/
+	}
+	
 	//////Help Menu//////
 	
 	public void aboutLink(){
