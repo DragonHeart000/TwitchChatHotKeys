@@ -8,6 +8,7 @@ public class Macro implements Serializable{
 	int input;
 	String output;
 	String condition;
+	int amountOfTimesUsed;
 	
 	public Macro(int input, String output, String condition){
 		/*
@@ -20,6 +21,7 @@ public class Macro implements Serializable{
 		this.input=input;
 		this.output=output;
 		this.condition=condition;
+		amountOfTimesUsed=0;
 	}
 	
 	public int getInput(){
@@ -27,11 +29,18 @@ public class Macro implements Serializable{
 	}
 	
 	public String getOutput(){
+		amountOfTimesUsed++;
 		return output;
 	}
 	
+	//GAME::GAMENAME will be for using a macro only when GAMENAME is being played (need to implement twitch api for this to work).
+	//COMMAND::COMMANDNAME will be for auto responding to when COMMANDNAME is said in chat.
 	public String getCondition(){
 		return condition;
+	}
+	
+	public int getUsage(){
+		return amountOfTimesUsed;
 	}
 
 }

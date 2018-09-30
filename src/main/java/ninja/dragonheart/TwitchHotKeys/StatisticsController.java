@@ -1,6 +1,7 @@
 package ninja.dragonheart.TwitchHotKeys;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.application.Platform;
@@ -8,14 +9,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 
 public class StatisticsController {
+	//TODO add back button
 	
 	//FXML vars
 	@FXML
 	private AnchorPane mainPane;
+	
+	@FXML
+	private ListView<?> mostTalketiveUsersListView;
 	
 	
 	/*
@@ -102,5 +108,69 @@ public class StatisticsController {
 				e.printStackTrace();
 			}  //opens the URL in the default browser
 		} 
+	}
+	
+	/////////////////////////////////////Setup Data///////////////////////////////////////
+	
+	public void initialize() { //Initialize method is called the stats fxml file is loaded
+		refreshData();
+	}
+	
+	public void refreshData(){
+		///////////////////////////////////////Most talkative users data///////////////////////////////////////
+		//Data on chatters will be presented in the listview with the fx:id mostTalketiveUsersListView
+		
+		ArrayList<Chatter> chatters=Main.getChatters(); //Data with all chatters.
+		
+		 //Use Chatter.getAmountOfMessagesSent() to get how many messages that user has sent.
+		//Organize arraylist into a list with most messages sent first.
+		
+		///////////////////////////////////////Command usage///////////////////////////////////////
+		//Very simular to above but with different data.
+		ArrayList<Macro> macrosForCommands=Main.getSettings().getMacros(); //Data with all macros
+		
+		/*Macros that are for commands will have the Macro.getCondition() method return a string that starts
+		* like this: "COMMAND::" and then is followed with the command that it responds to when said in chat
+		* 
+		* Example: "COMMAND::!YouTube" will mean that whenever !YouTube is said in chat it will say whatever
+		* Macro.getOutPut(); says in chat.
+		* 
+		* You must check all macros and only use ones that have COMMAND:: at the start of the string returned from
+		* Macro.getCondition(); and then sort the simularly to how most talkative users was sorted.
+		*/
+		
+		///////////////////////////////////////Keyboard heatmap///////////////////////////////////////
+		//You may need to talk to me again before doing this one.
+		
+		ArrayList<Macro> macrosForKeyBoard=Main.getSettings().getMacros(); //Data with all macros
+		
+		/* Use Macro.getUsage() to get how many times that macro was used.
+		 * Use Macro.getInput() to get an int that represents what button that macro is tied to.
+		 * View this table to see what ints are tied to what keys:
+		 * https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+		 * 
+		 * Set each button on the keyboard shown in the StatisticsScreen.fxml file that is represented by the given
+		 * number from Macro.getInput() to a colour dynamically picked by scaleing a colour spectrum to the spectrum
+		 * of usage of macros.
+		 */
+		
+		///////////////////////////////////////Chat activity Graph///////////////////////////////////////
+		//Work on this last and if you want to.
+		//Graph should show the chat activity over time.
+		//Tell me what data you want me to provide and I can send it your way.
+		
+		
+		
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	public void goBack(){
+		
 	}
 }

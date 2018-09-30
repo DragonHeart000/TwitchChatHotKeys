@@ -29,7 +29,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <ListView layoutX="0.0" layoutY="238.0" prefHeight="362.0" prefWidth="150.0" />
+    <ListView fx:id="mostTalketiveUsersListView" layoutX="0.0" layoutY="238.0" prefHeight="362.0" prefWidth="150.0" />
     <LineChart id="LineChart" layoutX="150.0" layoutY="200.0" legendSide="BOTTOM" title="Chat Activity" titleSide="TOP">
       <xAxis>
         <CategoryAxis side="BOTTOM" />
@@ -152,5 +152,6 @@
       </font>
     </Text>
     <Line endX="744.0" endY="-2.0" layoutX="67.0" layoutY="201.0" startX="-74.0" startY="-2.0" />
+    <Button layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onMouseReleased="#goBack" text="&lt; Back" />
   </children>
 </AnchorPane>
