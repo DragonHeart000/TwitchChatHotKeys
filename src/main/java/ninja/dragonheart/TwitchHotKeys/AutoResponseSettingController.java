@@ -159,8 +159,25 @@ public class AutoResponseSettingController {
 	/////////////////////////////////////Auto Response Handling///////////////////////////////////////
 	
 	public void makeAutoResponse(){
-		Macro temp=new Macro(9999, newAutoResponseOutPut.getText(), "COMMAND::" + newAutoResponseInPut.getText());
-		Main.addSettingsMacro(temp);
+		if (!newAutoResponseOutPut.getText().equals("") || !newAutoResponseInPut.getText().equals("")){
+			Macro temp=new Macro(9999, newAutoResponseOutPut.getText(), "COMMAND::" + newAutoResponseInPut.getText());
+			Main.addSettingsMacro(temp);
+			
+			newAutoResponseOutPut.setText("");
+			newAutoResponseInPut.setText("");
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Missing Parameter");
+			alert.setHeaderText(null);
+			alert.setContentText("Please make sure you have entered something for both the input and output.");
+			alert.showAndWait();
+		}
+		
+		
+		/*
+		 * autoResponseInputListView
+		 * autoResponseOutputListView
+		 */
 	}
 	
 	public void deleteAutoResponse(){

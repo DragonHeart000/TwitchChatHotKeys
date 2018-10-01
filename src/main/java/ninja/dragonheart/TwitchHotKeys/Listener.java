@@ -61,6 +61,7 @@ public class Listener extends ListenerAdapter{
 		if (Main.doConnectMessage){
 			event.getBot().sendIRC().message(Main.getChannel(), "Twitch Chat Hot Keys loaded and ready for use! Version 0.3.7 Alpha. https://www.thk.chat");
 		}
+		
 		loadedSettings=Main.getSettings();
 		System.out.println(loadedSettings.toString());
 		for(Macro i : loadedSettings.getMacros()){

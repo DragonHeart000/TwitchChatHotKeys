@@ -5,16 +5,19 @@ import java.util.ArrayList;
 public class Chatter {
 	
 	String userName;
-	ArrayList<String> allMessagesSent=new ArrayList<String>();
-	long lastMessageSentTimeStamp;
+	ArrayList<ArrayList<String>> allMessagesSent=new ArrayList<ArrayList<String>>(); //2d array with message then timestamp
 	int amountOfMessagesSent;
 	boolean isMod;
 	
 	//Constructor
 	public Chatter(String userName, String lastMessageSent, long lastMessageSentTimeStamp){
 		this.userName = userName;
-		allMessagesSent.add(lastMessageSent);
-		this.lastMessageSentTimeStamp = lastMessageSentTimeStamp;
+		
+		ArrayList<String> temp=new ArrayList<String>();
+		temp.add(lastMessageSent);
+		temp.add(Long.toString(lastMessageSentTimeStamp));
+		allMessagesSent.add(temp);
+		
 		amountOfMessagesSent = 1;
 		isMod=false; //TODO actually set this var when twitch api is implemented.
 	}
@@ -22,8 +25,11 @@ public class Chatter {
 	//Mutators
 	public void update(String lastMessageSent, long lastMessageSentTimeStamp){
 		amountOfMessagesSent++;
-		allMessagesSent.add(lastMessageSent);
-		this.lastMessageSentTimeStamp = lastMessageSentTimeStamp;
+		
+		ArrayList<String> temp=new ArrayList<String>();
+		temp.add(lastMessageSent);
+		temp.add(Long.toString(lastMessageSentTimeStamp));
+		allMessagesSent.add(temp);
 	}
 	
 	//Accessors
@@ -32,11 +38,15 @@ public class Chatter {
 	}
 	
 	public String getLastMessageSent(){
-		return allMessagesSent.get(allMessagesSent.size()-1);
+		return allMessagesSent.get(allMessagesSent.size()-1).get(0);
+	}
+	
+	public ArrayList<ArrayList<String>> getAllMessagesSent(){
+		return allMessagesSent;
 	}
 	
 	public long getLastMessageSentTimeStamp(){
-		return lastMessageSentTimeStamp;
+		return Long.parseLong(allMessagesSent.get(allMessagesSent.size()-1).get(1));
 	}
 	
 	public int getAmountOfMessagesSent(){

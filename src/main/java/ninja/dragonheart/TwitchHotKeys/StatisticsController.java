@@ -148,6 +148,7 @@ public class StatisticsController {
 	/////////////////////////////////////Setup Data///////////////////////////////////////
 	
 	public void initialize() { //Initialize method is called the stats fxml file is loaded
+		final Long TIMEOFPROGRAMSTART=Main.getProgramStartTime();
 		refreshData();
 	}
 	
@@ -164,6 +165,8 @@ public class StatisticsController {
 		//Very simular to above but with different data.
 		ArrayList<Macro> macrosForCommands=Main.getSettings().getMacros(); //Data with all macros
 		
+		//COMMAND:: macros for this one
+		
 		/*Macros that are for commands will have the Macro.getCondition() method return a string that starts
 		* like this: "COMMAND::" and then is followed with the command that it responds to when said in chat
 		* 
@@ -179,6 +182,8 @@ public class StatisticsController {
 		
 		ArrayList<Macro> macrosForKeyBoard=Main.getSettings().getMacros(); //Data with all macros
 		
+		//EVERYTHING BUT COMMAND:: macros for this one
+		
 		/* Use Macro.getUsage() to get how many times that macro was used.
 		 * Use Macro.getInput() to get an int that represents what button that macro is tied to.
 		 * View this table to see what ints are tied to what keys:
@@ -190,9 +195,16 @@ public class StatisticsController {
 		 */
 		
 		///////////////////////////////////////Chat activity Graph///////////////////////////////////////
-		//Work on this last and if you want to.
 		//Graph should show the chat activity over time.
-		//Tell me what data you want me to provide and I can send it your way.
+		//Tell me if you need any more data.
+		//Here is how to set the data on a JavaFX graph: https://www.youtube.com/watch?v=CMmeFZyWWSI&ab_channel=GenuineCoder
+		
+		//The var TIMEOFPROGRAMSTART in the initialize method has the time that the program started. You can use that here
+		//It is a final since that time should never change.
+		//Unix time in mills. Returns the amount of milliseconds since Jan 01 1970 at the start of the program.
+		
+		//Chatter.getAllMessagesSent() will return a 2D ArrayList with the 0th element being the message and the 1st element being the timestamp
+		//Use Long.parseLong(String) to convert the timestamp from a string to a long that you can use.
 		
 		
 		

@@ -33,6 +33,7 @@ public class Main extends Application{
 	public static ArrayList<String> previousChannels=new ArrayList<String>();
 	public static boolean doConnectMessage=true;
 	public static ArrayList<Chatter> chatters=new ArrayList<Chatter>();
+	public static Long timeOfStart;
 	
 	public static void main(String [] args){
 		if (!FileHandleing.checkDir()){ //Info screen first time you launch the program
@@ -60,14 +61,18 @@ public class Main extends Application{
 			    	//Not running most recent version && not wanting to skip it
 			    	NewUpdate.startUpdate();
 			    } else {
+			    	timeOfStart=System.currentTimeMillis();
+			    	System.out.println(timeOfStart);
 			    	Application.launch(args); //If running latest version run program
 			    }
 			    
 			} catch (JSONException e) {
 				ErrorHandling.error(e, "Failed to get most recent version from gitHub because of JSONException. Starting without checking."); //Warn user
+				timeOfStart=System.currentTimeMillis();
 				Application.launch(args); //Start anyway
 			} catch (IOException e) {
 				ErrorHandling.error(e, "Failed to get most recent version from gitHub because of IOException. starting without checking.");
+				timeOfStart=System.currentTimeMillis();
 				Application.launch(args);
 			}
 
@@ -237,6 +242,11 @@ public class Main extends Application{
     
     public static void updateChatters(ArrayList<Chatter> newChattersList){
     	chatters=newChattersList;
+    }
+    
+    /////Time of program start/////
+    public static long getProgramStartTime(){
+    	return timeOfStart;
     }
 
 }
