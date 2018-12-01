@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Chatter {
 	
 	String userName;
-	ArrayList<ArrayList<String>> allMessagesSent=new ArrayList<ArrayList<String>>(); //2d array with message then timestamp
+	ArrayList<ArrayList<String>> allMessagesSent=new ArrayList<ArrayList<String>>(); //2d ArrayList with message then timestamp
 	int amountOfMessagesSent;
 	boolean isMod;
 	
